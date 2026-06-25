@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>SPM Biology Sprint Quiz</title>
 <style>
-:root{
-  --bg:#07111f;--card:#111c2e;--text:#eef6ff;--muted:#a9b8cf;
-  --accent:#3dd6c6;--accent2:#7aa7ff;--danger:#ff5f6d;--ok:#37d67a;
-  --warn:#ffd166;--border:rgba(255,255,255,.12);
-}
+:root{--bg:#07111f;--card:#111c2e;--text:#eef6ff;--muted:#a9b8cf;--accent:#3dd6c6;--accent2:#7aa7ff;--danger:#ff5f6d;--ok:#37d67a;--warn:#ffd166;--border:rgba(255,255,255,.12)}
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,sans-serif;background:radial-gradient(circle at top,#152846 0,#07111f 45%,#04070d 100%);color:var(--text)}
 .app{max-width:1180px;margin:auto;padding:24px}
@@ -27,7 +23,6 @@ select,button{font:inherit}
 select{background:#0d1727;color:var(--text);border:1px solid var(--border);border-radius:12px;padding:12px}
 button{border:0;border-radius:14px;padding:13px 18px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#04111d;font-weight:900;cursor:pointer}
 button.secondary{background:#1d2e49;color:var(--text);border:1px solid var(--border)}
-button.danger{background:linear-gradient(90deg,#ff8a8a,#ff5f6d);color:#240207}
 .quiz,.results{display:none}
 .quiz.fullscreen{max-width:980px;margin:auto;padding-top:28px}
 .topbar{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin-bottom:24px}
@@ -39,7 +34,6 @@ button.danger{background:linear-gradient(90deg,#ff8a8a,#ff5f6d);color:#240207}
 .question{font-size:30px;font-weight:900;line-height:1.35;margin:20px 0}
 .options{display:grid;gap:12px}
 .option{position:relative;padding:18px;border:1px solid var(--border);border-radius:16px;background:rgba(255,255,255,.05);cursor:pointer;line-height:1.35;font-size:18px}
-.option:hover{border-color:rgba(61,214,198,.7)}
 .option.correct{background:rgba(55,214,122,.15);border-color:var(--ok)}
 .option.wrong{background:rgba(255,95,109,.15);border-color:var(--danger)}
 .signal{float:right;font-weight:900;border-radius:999px;padding:5px 10px;font-size:13px;margin-left:12px}
@@ -55,70 +49,57 @@ button.danger{background:linear-gradient(90deg,#ff8a8a,#ff5f6d);color:#240207}
 </head>
 <body>
 <div class="app">
+<div id="intro">
+<div class="hero">
+<div class="panel">
+<h1>SPM Biology Sprint Quiz</h1>
+<div class="sub">Timed Malaysia SPM Biology revision. Select modules, choose 20–50 questions, answer within 60 seconds, use hints when stuck, and review mistakes after the session.</div>
+<div class="badges"><div class="badge">60s/question</div><div class="badge">20–50 questions</div><div class="badge">100 unique questions/module</div><div class="badge">20% harder questions</div><div class="badge">No repeated questions/session</div></div>
+</div>
+<div class="panel">
+<h2>Session Setup</h2>
+<label>Questions:
+<select id="count"><option>20</option><option>30</option><option>40</option><option>50</option></select>
+</label>
+<div class="controls">
+<button onclick="selectAll()">Select all modules</button>
+<button class="secondary" onclick="clearAll()">Clear</button>
+<button onclick="startQuiz()">Start Quiz</button>
+</div>
+</div>
+</div>
+<div class="panel controls" id="setup">
+<h2>Choose Modules</h2>
+<div class="moduleGrid" id="moduleGrid"></div>
+<p class="small">Questions are SPM-style practice questions, not copied past-year questions.</p>
+</div>
+</div>
 
-  <div id="intro">
-    <div class="hero">
-      <div class="panel">
-        <h1>SPM Biology Sprint Quiz</h1>
-        <div class="sub">Timed Malaysia SPM Biology revision. Select modules, choose 20–50 questions, answer within 60 seconds, use hints when stuck, and review mistakes after the session.</div>
-        <div class="badges">
-          <div class="badge">60s/question</div>
-          <div class="badge">20–50 questions</div>
-          <div class="badge">Hints</div>
-          <div class="badge">20% harder questions</div>
-          <div class="badge">No repeated questions</div>
-        </div>
-      </div>
-      <div class="panel">
-        <h2>Session Setup</h2>
-        <label>Questions:
-          <select id="count"><option>20</option><option>30</option><option>40</option><option>50</option></select>
-        </label>
-        <div class="controls">
-          <button onclick="selectAll()">Select all modules</button>
-          <button class="secondary" onclick="clearAll()">Clear</button>
-          <button onclick="startQuiz()">Start Quiz</button>
-        </div>
-      </div>
-    </div>
+<div class="quiz fullscreen" id="quiz">
+<div class="topbar">
+<div><div class="small" id="qnum"></div><div class="progress"><div id="bar"></div></div></div>
+<div class="timer" id="timer">60</div>
+</div>
+<div class="meta" id="moduleName"></div>
+<div class="question" id="question"></div>
+<div class="options" id="options"></div>
+<div class="explain" id="hintBox"></div>
+<div class="explain" id="explain"></div>
+<div class="actions">
+<button class="secondary" onclick="showHint()">Hint</button>
+<button class="secondary" onclick="skipQuestion()">Skip</button>
+<button id="nextBtn" onclick="nextQuestion()" disabled>Next</button>
+</div>
+</div>
 
-    <div class="panel controls" id="setup">
-      <h2>Choose Modules</h2>
-      <div class="moduleGrid" id="moduleGrid"></div>
-      <p class="small">Questions are SPM-style practice questions, not copied past-year questions.</p>
-    </div>
-  </div>
-
-  <div class="quiz fullscreen" id="quiz">
-    <div class="topbar">
-      <div>
-        <div class="small" id="qnum"></div>
-        <div class="progress"><div id="bar"></div></div>
-      </div>
-      <div class="timer" id="timer">60</div>
-    </div>
-
-    <div class="meta" id="moduleName"></div>
-    <div class="question" id="question"></div>
-    <div class="options" id="options"></div>
-    <div class="explain" id="hintBox"></div>
-    <div class="explain" id="explain"></div>
-
-    <div class="actions">
-      <button class="secondary" onclick="showHint()">Hint</button>
-      <button class="secondary" onclick="skipQuestion()">Skip</button>
-      <button id="nextBtn" onclick="nextQuestion()" disabled>Next</button>
-    </div>
-  </div>
-
-  <div class="results panel" id="results">
-    <h2>Results</h2>
-    <div class="score" id="score"></div>
-    <div id="summary"></div>
-    <div class="row"><button onclick="restart()">New Session</button></div>
-    <h2 style="margin-top:22px">Review</h2>
-    <div id="review"></div>
-  </div>
+<div class="results panel" id="results">
+<h2>Results</h2>
+<div class="score" id="score"></div>
+<div id="summary"></div>
+<div class="row"><button onclick="restart()">New Session</button></div>
+<h2 style="margin-top:22px">Review</h2>
+<div id="review"></div>
+</div>
 </div>
 
 <script>
@@ -135,121 +116,164 @@ const MODULES=[
 ["M10","Exam Mastery","Variables, graph skills, application questions"]
 ];
 
-function q(module,stem,options,answer,explanation,hint,difficulty="standard"){
-return{module,stem,options,answer,explanation,hint,difficulty,id:module+"|"+stem}
+const ITEMS={
+M1:[
+["cell","Basic structural and functional unit of life",["A tissue that forms organs","A molecule that stores energy","A chemical catalyst"],"A cell is the basic structural and functional unit of life.","Remember structural + functional unit."],
+["mitochondrion","Site of aerobic respiration to produce ATP",["Site of protein synthesis","Controls osmosis only","Stores urine"],"Mitochondrion produces ATP through aerobic respiration.","Powerhouse of the cell."],
+["ribosome","Site of protein synthesis",["Site of photosynthesis","Stores water","Filters blood"],"Ribosomes make proteins.","Think protein production."],
+["osmosis","Movement of water from high to low water potential through a partially permeable membrane",["Movement of particles using ATP","Movement of oxygen in blood","Breaking down glucose"],"Osmosis involves water, water potential and a partially permeable membrane.","Water + membrane + water potential."],
+["diffusion","Movement of particles from high to low concentration",["Movement from low to high concentration","Movement of water only","Requires ATP"],"Diffusion does not require energy.","High to low concentration."],
+["active transport","Movement from low to high concentration using ATP",["Movement from high to low concentration","Movement of water only","No energy required"],"Active transport uses ATP against a concentration gradient.","Against gradient = ATP."],
+["enzyme","Biological catalyst",["Energy currency","Blood pigment","Genetic material"],"Enzymes speed up reactions and are not used up.","Shortest answer: biological catalyst."],
+["denaturation","Change in enzyme active site shape due to high temperature or extreme pH",["Formation of ATP","Movement of water","Blood clotting"],"Denatured enzymes lose their active site shape.","Heat changes protein shape."],
+["plasma membrane","Selectively permeable membrane controlling movement of substances",["Rigid cell wall only","Site of photosynthesis","Stores genetic material"],"The plasma membrane controls entry and exit of substances.","Selectively permeable."],
+["nucleus","Controls cell activities and contains genetic material",["Produces ATP","Carries oxygen","Stores urine"],"The nucleus contains DNA and controls cell activities.","Control centre of cell."]
+],
+M2:[
+["cellular respiration","Breakdown of glucose to release ATP",["Production of glucose using light","Movement of water","Production of sperm"],"Respiration breaks down glucose to release ATP.","Glucose releases energy."],
+["aerobic respiration site","Mitochondrion",["Chloroplast","Nucleus","Ribosome"],"Aerobic respiration occurs in mitochondria.","Respiration = mitochondrion."],
+["ATP","Energy currency of the cell",["Genetic code","Blood protein","Digestive enzyme"],"ATP supplies energy for cellular activities.","ATP = energy currency."],
+["photosynthesis","Process where plants use light energy to produce glucose",["Breakdown of glucose","Formation of urine","Transport of oxygen"],"Photosynthesis produces glucose using light energy.","Plants make glucose."],
+["photosynthesis site","Chloroplast",["Mitochondrion","Kidney","Testis"],"Photosynthesis occurs in chloroplasts.","Photosynthesis = chloroplast."],
+["chlorophyll","Absorbs light energy",["Produces sperm","Filters blood","Carries oxygen"],"Chlorophyll traps light energy for photosynthesis.","Green pigment absorbs light."],
+["photosynthesis products","Glucose and oxygen",["Carbon dioxide and water","ATP and carbon dioxide","Urea and water"],"Products of photosynthesis are glucose and oxygen.","CO2 + water become glucose + oxygen."],
+["respiration reactants","Glucose and oxygen",["Carbon dioxide and water","Glucose and urea","Oxygen and nitrogen"],"Aerobic respiration uses glucose and oxygen.","Respiration needs glucose and oxygen."],
+["exercise oxygen demand","More oxygen is needed for aerobic respiration to produce more ATP",["Oxygen produces chlorophyll","Oxygen stops osmosis","Oxygen forms urine"],"During exercise, muscles need more ATP.","Exercise needs ATP."],
+["limiting factor in photosynthesis","A factor that limits the rate of photosynthesis",["A hormone that lowers glucose","A blood vessel","A type of gamete"],"Light, carbon dioxide and temperature can become limiting factors.","Rate is limited by the scarcest factor."]
+],
+M3:[
+["mitosis","Cell division producing two genetically identical diploid daughter cells",["Produces four haploid cells","Fusion of gametes","Breakdown of glucose"],"Mitosis produces two identical diploid cells.","2 identical 2n cells."],
+["meiosis","Cell division producing four genetically different haploid cells",["Produces two identical cells","Forms urine","Moves water"],"Meiosis produces gametes.","4 different n cells."],
+["somatic cells","Body cells where mitosis occurs",["Gametes","Bacteria only","Urine"],"Mitosis occurs in somatic cells.","Body cells = somatic cells."],
+["germ cells","Cells in reproductive organs that undergo meiosis",["Skin cells","Red blood cells","Nephrons"],"Meiosis occurs in germ cells.","Gamete formation."],
+["diploid","Cell containing two sets of chromosomes",["One set of chromosomes","No chromosomes","Only proteins"],"Diploid is written as 2n.","2n."],
+["haploid","Cell containing one set of chromosomes",["Two sets of chromosomes","No nucleus","Only cytoplasm"],"Haploid is written as n.","n."],
+["crossing over","Exchange of genetic material between homologous chromosomes",["Blood clotting","Water movement","ATP production"],"Crossing over produces genetic variation.","Meiosis variation."],
+["metaphase","Chromosomes line up at the equator",["Chromosomes disappear","Cytoplasm divides first","DNA is destroyed"],"In metaphase, chromosomes align at the equator.","Meta = middle."],
+["anaphase","Sister chromatids separate and move to opposite poles",["Chromosomes line up at equator","Nucleus controls cell","Glucose breaks down"],"Anaphase separates chromatids.","Apart = anaphase."],
+["fertilisation chromosome restoration","Haploid gametes fuse to restore diploid chromosome number",["Mitosis doubles chromosomes","Proteins enter urine","ADH absorbs water"],"n + n restores 2n.","n + n = 2n."]
+],
+M4:[
+["red blood cells","Transport oxygen using haemoglobin",["Destroy pathogens","Blood clotting","Produce hormones"],"Red blood cells carry oxygen.","Haemoglobin carries oxygen."],
+["white blood cells","Defend the body against pathogens",["Carry oxygen","Store urine","Produce glucose"],"White blood cells are involved in defence.","WBC = immunity."],
+["platelets","Help in blood clotting",["Transport oxygen","Pump blood","Filter blood"],"Platelets help stop bleeding.","Platelets clot blood."],
+["plasma","Transports nutrients, hormones, carbon dioxide and wastes",["Produces sperm","Stores urine","Absorbs light"],"Plasma is the liquid part of blood.","Transport medium."],
+["arteries","Carry blood away from the heart",["Carry blood towards heart","Produce antibodies","Store blood"],"Arteries carry blood away from the heart.","A for away."],
+["veins","Carry blood towards the heart",["Carry blood away from heart","Make oxygen","Break down glucose"],"Veins return blood to the heart.","Veins return."],
+["capillaries","Site of exchange of substances",["Pump blood","Produce red blood cells","Store urine"],"Capillaries have thin walls for exchange.","Exchange happens here."],
+["valves","Prevent backflow of blood",["Produce oxygen","Make antibodies","Filter urea"],"Valves ensure one-way flow of blood.","One-way flow."],
+["double circulation","Blood passes through the heart twice in one complete circulation",["Blood has two colours","Blood flows without heart","Oxygen enters kidney twice"],"Double circulation includes pulmonary and systemic circulation.","Heart-lung-heart-body."],
+["left ventricle","Pumps oxygenated blood to the whole body at high pressure",["Receives deoxygenated blood","Produces plasma","Filters blood"],"The left ventricle has a thick muscular wall.","Pumps to whole body."]
+],
+M5:[
+["kidney","Filters blood and forms urine",["Produces bile","Pumps blood","Produces sperm"],"Kidney filters blood and forms urine.","Main excretory organ."],
+["nephron","Structural and functional unit of kidney",["Energy currency","Male gamete","Blood vessel"],"Nephron forms urine.","Unit of kidney."],
+["ultrafiltration","Filtration of small molecules from blood into Bowman capsule",["Fusion of gametes","Protein synthesis","Photosynthesis"],"Ultrafiltration occurs at glomerulus/Bowman capsule.","Small molecules filtered."],
+["glomerulus","Site where high pressure filtration occurs",["Stores urine","Produces insulin","Absorbs light"],"Blood pressure forces small molecules into Bowman capsule.","Filter knot."],
+["selective reabsorption","Useful substances are reabsorbed into blood",["Waste becomes oxygen","Sperm enters ovum","Blood clots"],"Glucose, amino acids, salts and water may be reabsorbed.","Useful substances return."],
+["proximal convoluted tubule","Main site of selective reabsorption",["Site of fertilisation","Site of photosynthesis","Site of heartbeat"],"PCT reabsorbs useful substances.","PCT is key."],
+["tubular secretion","Unwanted substances are secreted into the nephron",["Food is digested","Gametes fuse","Light is absorbed"],"Tubular secretion helps maintain blood composition.","Waste secreted."],
+["ADH","Increases water reabsorption by kidney",["Lowers blood glucose","Raises blood glucose","Produces sperm"],"ADH helps conserve water.","ADH saves water."],
+["normal urine","Contains water, urea and mineral salts but no glucose, protein or blood cells",["Contains glucose and protein","Contains red blood cells","Contains starch"],"Normal urine should not contain glucose, protein or blood cells.","No glucose/protein/blood cells."],
+["dehydration urine response","More ADH causes more water reabsorption and less urine",["Less ADH causes more water loss","Insulin increases urine","Chlorophyll absorbs urine"],"Dehydration increases ADH.","Dehydration → ADH."]
+],
+M6:[
+["nervous system","Detects stimuli and coordinates responses",["Produces glucose","Filters blood","Stores urine"],"The nervous system coordinates body responses.","Stimulus-response."],
+["central nervous system","Brain and spinal cord",["Heart and lungs","Kidney and bladder","Ovary and uterus"],"CNS consists of brain and spinal cord.","CNS = brain + spinal cord."],
+["sensory neurone","Carries impulse from receptor to CNS",["Carries impulse from CNS to effector","Produces hormone","Destroys pathogen"],"Sensory neurone carries impulse to CNS.","Sensory = to CNS."],
+["motor neurone","Carries impulse from CNS to effector",["Carries impulse to CNS","Produces glucose","Filters blood"],"Motor neurone carries impulse to effector.","Motor = movement."],
+["reflex action","Rapid automatic response to stimulus",["Slow hormone response","Production of antibodies","Blood clotting"],"Reflex action protects the body.","Rapid + automatic."],
+["reflex arc","Receptor to sensory neurone to relay neurone to motor neurone to effector",["Effector to receptor only","Brain to kidney only","Glucose to insulin"],"Reflex arc is the pathway of reflex action.","Receptor starts, effector ends."],
+["insulin","Lowers blood glucose level",["Raises blood glucose","Absorbs light","Carries oxygen"],"Insulin is secreted when blood glucose is high.","Insulin lowers."],
+["glucagon","Raises blood glucose level",["Lowers blood glucose","Forms urine","Absorbs light"],"Glucagon is secreted when blood glucose is low.","Glucagon raises."],
+["adrenaline","Prepares body for fight or flight",["Maintains uterine lining","Filters blood","Makes yoghurt"],"Adrenaline increases heart rate and breathing rate.","Emergency hormone."],
+["homeostasis","Maintenance of a stable internal environment",["Production of gametes","Breakdown of glucose","Grouping organisms"],"Homeostasis keeps internal conditions stable.","Stable internal condition."]
+],
+M7:[
+["testes","Produce sperm and testosterone",["Produce ovum","Site of implantation","Store urine"],"Testes produce sperm and male hormone.","Male gamete + hormone."],
+["ovary","Produces ovum, oestrogen and progesterone",["Produces sperm","Filters blood","Carries semen"],"Ovary produces ova and female hormones.","Ovum + hormones."],
+["fallopian tube","Site of fertilisation",["Site of implantation","Produces sperm","Stores urine"],"Fertilisation occurs in the fallopian tube.","Not uterus."],
+["uterus","Site of implantation and foetal development",["Site of fertilisation","Produces sperm","Filters blood"],"Embryo implants in the uterus.","Embryo develops here."],
+["fertilisation","Fusion of sperm and ovum to form zygote",["Release of ovum","Attachment of embryo","Breakdown of glucose"],"Fertilisation forms a zygote.","Fusion + zygote."],
+["implantation","Attachment of embryo to uterine wall",["Fusion of gametes","Release of ovum","Production of sperm"],"Implantation occurs in the uterus.","Embryo attaches."],
+["ovulation","Release of mature ovum from ovary",["Fusion of sperm and ovum","Attachment to uterus","Production of urine"],"Ovulation usually occurs around day 14.","Release of ovum."],
+["progesterone","Maintains uterine lining for pregnancy",["Lowers glucose","Produces ATP","Carries oxygen"],"Progesterone maintains the uterine lining.","Pregnancy support hormone."],
+["placenta","Exchanges oxygen, nutrients and wastes between mother and foetus",["Produces sperm","Site of fertilisation","Releases ovum"],"Placenta is an exchange organ.","Mother-foetus exchange."],
+["zygote","Fertilised egg cell formed after fertilisation",["Male gamete","Female hormone","Blood vessel"],"Zygote is the first cell after fertilisation.","Fertilised egg."]
+],
+M8:[
+["biodiversity","Variety of living organisms in an area",["One species only","Movement of water","Production of insulin"],"Biodiversity means variety of living organisms.","Variety is key."],
+["genetic diversity","Variation of genes within a species",["Variety of ecosystems","Non-living factor","Food chain"],"Genetic diversity occurs within one species.","Genes vary."],
+["species diversity","Variety of species in an area",["Variety of genes only","Water movement","Hormone control"],"Species diversity means many different species.","Many species."],
+["ecosystem diversity","Variety of ecosystems in an area",["One organism only","A single gene","Blood flow"],"Different ecosystems increase biodiversity.","Forest, pond, mangrove."],
+["ecosystem","Interaction between organisms and their environment",["Only animals in zoo","Only plants","A single gene"],"Ecosystem includes living and non-living components.","Living + environment."],
+["biotic factor","Living component of ecosystem",["Non-living component","Energy currency","Foreign gene"],"Biotic factors are living things.","Bio = life."],
+["abiotic factor","Non-living component of ecosystem",["Living component","Gamete","Hormone"],"Abiotic factors include light, water and temperature.","Non-living."],
+["decomposer","Organism that breaks down dead matter and recycles nutrients",["Producer of sperm","Heart chamber","Blood pigment"],"Decomposers recycle nutrients.","Bacteria/fungi."],
+["in-situ conservation","Conservation in natural habitat",["Conservation outside natural habitat","Genetic engineering","Fermentation"],"In-situ protects species in their habitat.","Original place."],
+["ex-situ conservation","Conservation outside natural habitat",["Conservation in natural habitat","Food chain","Osmosis"],"Ex-situ includes zoos and seed banks.","Outside habitat."]
+],
+M9:[
+["biotechnology","Use of living organisms or components to produce useful products",["Study of rocks","Movement of water","Blood circulation"],"Biotechnology uses living organisms or their components.","Living things + useful products."],
+["fermentation","Anaerobic breakdown of sugar by microorganisms",["Aerobic respiration","Fusion of gametes","Formation of urine"],"Fermentation occurs without oxygen.","No oxygen."],
+["yeast","Microorganism used in bread making",["Lactobacillus","Mosquito","Virus"],"Yeast produces carbon dioxide that makes dough rise.","Bread = yeast."],
+["Lactobacillus","Bacteria used to make yoghurt",["Yeast","Virus","Mosquito"],"Lactobacillus converts lactose to lactic acid.","Yoghurt bacteria."],
+["genetic engineering","Manipulation of genes to produce desired characteristics",["Grouping species","Blood clotting","Plant wilting"],"Genetic engineering changes genes.","Manipulate genes."],
+["recombinant DNA","DNA formed by joining DNA from different organisms",["DNA with no gene","ATP molecule","Blood plasma"],"Recombinant DNA combines DNA from different sources.","Combined DNA."],
+["plasmid","Vector used to transfer gene into bacteria",["Digestive enzyme","Light pigment","Blood cell"],"Plasmid carries desired gene.","Vector = carrier."],
+["tissue culture","Growing plant cells or tissues in sterile nutrient medium",["Blood clotting","Gamete fusion","Respiration"],"Tissue culture produces many identical plants.","Sterile medium."],
+["cloning","Production of genetically identical organisms",["Production of different gametes","Breakdown of sugar","Classification"],"Cloning produces identical copies.","Identical organisms."],
+["GMO","Organism containing foreign gene",["Organism without DNA","Blood group","Urine sample"],"GMO has inserted foreign gene.","Foreign gene."]
+],
+M10:[
+["hypothesis","Prediction relating manipulated and responding variables",["Observation only","Variable kept constant","Final score"],"Hypothesis links two variables.","Prediction before experiment."],
+["manipulated variable","Variable changed by the researcher",["Variable measured","Variable kept constant","Control set-up"],"Manipulated variable is changed.","Changed variable."],
+["responding variable","Variable measured in an experiment",["Variable changed","Variable kept constant","Control set-up"],"Responding variable is the measured result.","Measured variable."],
+["controlled variable","Variable kept constant",["Variable measured","Variable changed","Hypothesis"],"Controlled variables ensure fair test.","Kept constant."],
+["control set-up","Used for comparison to ensure fair test",["Used to change all variables","Used to remove results","Used to increase marks"],"Control set-up allows comparison.","Comparison group."],
+["observation","What is seen or measured",["Reason for result","Prediction","Theory only"],"Observation is recorded from the experiment.","See or measure."],
+["inference","Logical explanation based on observation",["What is seen only","Variable changed","Question number"],"Inference explains the observation.","Why it happened."],
+["conclusion","Statement that accepts or rejects the hypothesis",["A diagram only","A random guess","A controlled variable"],"Conclusion is based on results.","Accept or reject hypothesis."],
+["positive relationship","Both variables increase together",["One increases while other decreases","No change","No variables"],"Positive relationship means both increase.","Increase together."],
+["limiting factor","Factor that limits the rate of a process",["Hormone lowering glucose","Blood vessel","Gamete"],"A limiting factor prevents further increase in rate.","Scarcest factor limits rate."]
+]
+};
+
+const STYLES=[
+x=>`What is ${x[0]}?`,
+x=>`Which answer best describes ${x[0]}?`,
+x=>`Identify the correct statement about ${x[0]}.`,
+x=>`Which option would most likely score marks for ${x[0]}?`,
+x=>`A student is asked about ${x[0]}. Which answer is correct?`,
+x=>`Which statement matches ${x[0]}?`,
+x=>`Choose the best SPM answer for ${x[0]}.`,
+x=>`Which option is most closely related to ${x[0]}?`,
+x=>`Apply the concept of ${x[0]}. Which answer is best?`,
+x=>`Why is ${x[0]} important in Biology?`
+];
+
+function makeBank(){
+let out=[];
+for(const mod in ITEMS){
+ITEMS[mod].forEach((item,itemIndex)=>{
+STYLES.forEach((makeStem,styleIndex)=>{
+out.push({
+module:mod,
+id:`${mod}-${itemIndex}-${styleIndex}`,
+stem:makeStem(item),
+answer:item[1],
+d:item[2],
+explanation:item[3],
+hint:item[4],
+difficulty:styleIndex>=8?"hard":"standard"
+});
+});
+});
+}
+return out;
 }
 
-const BANK=[
-q("M1","What is a cell?",["Basic structural and functional unit of life","A tissue that forms organs","A molecule that stores energy","A chemical catalyst"],0,"Keyword: basic structural and functional unit.","Remember: structural + functional unit."),
-q("M1","Function of mitochondrion?",["Protein synthesis","Aerobic respiration to produce ATP","Controls osmosis only","Stores urine"],1,"Mitochondrion is the site of aerobic respiration; ATP is produced.","Powerhouse of the cell."),
-q("M1","Function of ribosome?",["Protein synthesis","Lipid digestion","Blood clotting","Photosynthesis"],0,"Ribosome is the site of protein synthesis.","Think protein production."),
-q("M1","What is osmosis?",["Movement of water from high to low water potential through a partially permeable membrane","Movement of particles from low to high concentration using ATP","Movement of oxygen in blood","Breaking down glucose"],0,"Must include water, high to low water potential, partially permeable membrane.","Water + membrane + water potential."),
-q("M1","What is diffusion?",["Particles move from high to low concentration","Particles move from low to high concentration using ATP","Water only moves through membrane","Glucose is broken down"],0,"Diffusion is movement from high to low concentration.","No ATP is needed."),
-q("M1","What is active transport?",["Movement from low to high concentration using ATP","Movement from high to low concentration","Water movement only","No energy required"],0,"Active transport uses ATP and moves against the concentration gradient.","Against gradient = ATP."),
-q("M1","What is an enzyme?",["Biological catalyst","Energy currency","Blood pigment","Genetic material"],0,"Enzyme = biological catalyst.","Shortest perfect answer."),
-q("M1","Why do enzymes stop working at high temperature?",["They are denatured","They become glucose","They become oxygen","They evaporate"],0,"High temperature denatures enzymes.","Heat changes active site."),
-q("M1","A red blood cell is placed in concentrated salt solution. What happens?",["It shrinks because water moves out by osmosis","It bursts because salt enters rapidly","It divides by mitosis","It produces ATP"],0,"Water moves out from higher water potential inside to lower water potential outside.","Think hypertonic solution.","hard"),
-q("M1","Why does boiling affect enzyme activity?",["The active site changes shape due to denaturation","More substrate is produced","The enzyme becomes ATP","The pH becomes neutral"],0,"Heat denatures the enzyme and changes the active site shape.","Enzyme is a protein.","hard"),
-
-q("M2","What is cellular respiration?",["Breakdown of glucose to release ATP","Production of glucose using light","Movement of water molecules","Production of sperm"],0,"Respiration breaks down glucose to release ATP.","Glucose breaks down."),
-q("M2","Site of aerobic respiration?",["Mitochondrion","Chloroplast","Nucleus","Ribosome"],0,"Aerobic respiration occurs in the mitochondrion.","Respiration = mitochondrion."),
-q("M2","What is ATP?",["Energy currency of the cell","Genetic code","Blood protein","Digestive enzyme"],0,"ATP supplies energy for cellular activities.","ATP = energy currency."),
-q("M2","What is photosynthesis?",["Process where plants use light energy to produce glucose","Breakdown of glucose to release ATP","Transport of oxygen in blood","Formation of urine"],0,"Photosynthesis uses light energy to make glucose.","Plants make glucose."),
-q("M2","Site of photosynthesis?",["Chloroplast","Mitochondrion","Kidney","Testis"],0,"Photosynthesis occurs in chloroplasts.","Photosynthesis = chloroplast."),
-q("M2","Function of chlorophyll?",["Absorbs light energy","Produces sperm","Filters blood","Carries oxygen"],0,"Chlorophyll absorbs light energy.","Green pigment absorbs light."),
-q("M2","Products of photosynthesis?",["Glucose and oxygen","Carbon dioxide and water","ATP and carbon dioxide","Urea and water"],0,"Photosynthesis produces glucose and oxygen.","CO2 + water become glucose + oxygen."),
-q("M2","Why are respiration and photosynthesis interdependent?",["Photosynthesis produces glucose and oxygen used in respiration","Both occur only in animals","Both produce urine","Respiration produces chlorophyll"],0,"Photosynthesis products are respiration reactants.","Glucose + oxygen link both."),
-q("M2","During vigorous exercise, why do muscle cells require more oxygen?",["To increase aerobic respiration and produce more ATP","To produce chlorophyll","To reduce osmosis","To form urine"],0,"More oxygen is needed for aerobic respiration to produce more ATP for muscles.","Exercise needs ATP.","hard"),
-q("M2","A plant is kept in darkness. What happens to photosynthesis rate?",["It decreases because light energy is unavailable","It increases because CO2 increases","It remains the same","It becomes fermentation"],0,"Photosynthesis decreases because light is unavailable.","No light = low photosynthesis.","hard"),
-
-q("M3","What is mitosis?",["Cell division producing 2 genetically identical diploid cells","Cell division producing 4 different haploid cells","Fusion of gametes","Production of urine"],0,"Mitosis produces two identical diploid daughter cells.","2 identical 2n cells."),
-q("M3","Where does mitosis occur?",["Somatic cells","Germ cells only","Fallopian tube only","Kidney only"],0,"Mitosis occurs in somatic/body cells.","Body cells = mitosis."),
-q("M3","Function of mitosis?",["Growth and repair","Gamete production","Genetic variation only","Blood clotting"],0,"Mitosis is for growth, repair and replacement.","Growth and repair."),
-q("M3","What is meiosis?",["Cell division producing 4 genetically different haploid cells","Cell division producing 2 identical diploid cells","Breakdown of glucose","Movement of water"],0,"Meiosis produces four genetically different haploid cells.","4 different n cells."),
-q("M3","Where does meiosis occur?",["Germ cells in testis and ovary","Skin cells","Liver cells","Nephrons"],0,"Meiosis occurs in reproductive organs to form gametes.","Gametes are formed by meiosis."),
-q("M3","Chromosome number after meiosis?",["Reduced by half, 2n to n","Maintained, 2n to 2n","Doubled","No chromosomes"],0,"Meiosis reduces chromosome number by half.","Reduction division."),
-q("M3","What causes genetic variation in meiosis?",["Crossing over and independent assortment","Osmosis and diffusion","ATP and ADH","Platelets and plasma"],0,"Crossing over and independent assortment create variation.","Variation keywords."),
-q("M3","Which mitosis stage has chromosomes at the equator?",["Metaphase","Prophase","Anaphase","Telophase"],0,"In metaphase, chromosomes line up at the equator.","Meta = middle."),
-q("M3","Why does meiosis maintain chromosome number after fertilisation?",["It produces haploid gametes so diploid number is restored after fusion","It produces identical diploid cells","It doubles chromosome number before birth","It prevents fertilisation"],0,"Meiosis halves chromosome number; fertilisation restores 2n.","n + n = 2n.","hard"),
-q("M3","A wound heals through production of new skin cells. Which process is involved?",["Mitosis","Meiosis","Fertilisation","Fermentation"],0,"Mitosis produces new identical cells for repair.","Skin repair = mitosis.","hard"),
-
-q("M4","Function of red blood cells?",["Transport oxygen using haemoglobin","Destroy pathogens","Blood clotting","Produce hormones"],0,"RBC transport oxygen using haemoglobin.","Haemoglobin carries oxygen."),
-q("M4","Function of white blood cells?",["Defend body against pathogens","Carry oxygen","Store urine","Produce glucose"],0,"White blood cells defend the body against pathogens.","WBC = immunity."),
-q("M4","Function of platelets?",["Blood clotting","Oxygen transport","Pumping blood","Filtering blood"],0,"Platelets help blood clot.","Platelets clot blood."),
-q("M4","Function of arteries?",["Carry blood away from heart","Carry blood towards heart","Exchange substances only","Produce antibodies"],0,"Arteries carry blood away from the heart.","A for away."),
-q("M4","Function of veins?",["Carry blood towards heart","Carry blood away from heart","Make oxygen","Break down glucose"],0,"Veins carry blood towards the heart.","Veins return blood."),
-q("M4","Function of capillaries?",["Site of exchange of substances","Pump blood","Produce red blood cells","Store urine"],0,"Capillaries are the site of exchange of substances.","Exchange happens in capillaries."),
-q("M4","What is double circulation?",["Blood passes through heart twice in one complete circulation","Blood has two colours","Blood flows without heart","Oxygen enters kidney twice"],0,"Double circulation means blood passes through the heart twice in one complete cycle.","Heart-lung-heart-body."),
-q("M4","Universal donor in ABO system?",["O","AB","A","B"],0,"Blood group O is the universal donor.","O gives to all in simple ABO context."),
-q("M4","Why are capillaries one cell thick?",["To allow efficient diffusion of substances","To prevent backflow","To pump blood strongly","To produce haemoglobin"],0,"Thin walls shorten diffusion distance for exchange.","One-cell thick = efficient diffusion.","hard"),
-q("M4","Why is the left ventricle wall thicker than the right?",["It pumps blood to the whole body at higher pressure","It receives deoxygenated blood","It prevents blood clotting","It produces plasma"],0,"Left ventricle pumps blood to the whole body at higher pressure.","Body distance is further than lungs.","hard"),
-
-q("M5","Main excretory organ?",["Kidney","Heart","Lung only","Stomach"],0,"Kidney is the main excretory organ.","Kidney filters blood."),
-q("M5","Function of kidney?",["Filters blood and forms urine","Produces bile","Pumps blood","Produces sperm"],0,"Kidney filters blood and forms urine.","Perfect one-line answer."),
-q("M5","What is a nephron?",["Structural and functional unit of kidney","Energy currency","Male gamete","Blood vessel"],0,"Nephron is the structural and functional unit of the kidney.","Unit of kidney."),
-q("M5","Site of ultrafiltration?",["Glomerulus/Bowman's capsule","Collecting duct only","Urethra","Bladder"],0,"Ultrafiltration occurs at the glomerulus into Bowman's capsule.","Glomerulus filters blood."),
-q("M5","Site of selective reabsorption?",["Proximal convoluted tubule","Aorta","Vagina","Ribosome"],0,"Selective reabsorption mainly occurs in the PCT.","PCT is key."),
-q("M5","Three urine formation processes?",["Ultrafiltration, selective reabsorption, tubular secretion","Diffusion, osmosis, fertilisation","Mitosis, meiosis, cloning","Respiration, photosynthesis, fermentation"],0,"Urine formation: ultrafiltration, selective reabsorption, tubular secretion.","Memorise this order."),
-q("M5","Function of ADH?",["Increases water reabsorption by kidney","Lowers blood glucose","Raises blood glucose","Produces sperm"],0,"ADH increases water reabsorption by the kidney.","ADH saves water."),
-q("M5","Should glucose be present in normal urine?",["No","Yes, always","Only protein","Only blood cells"],0,"Normal urine should not contain glucose.","Glucose in urine suggests abnormal condition."),
-q("M5","A dehydrated person produces less urine. Why?",["More ADH causes more water reabsorption","Less ADH causes less water reabsorption","Glucose is reabsorbed less","Protein enters urine"],0,"More ADH increases water reabsorption, producing less urine.","Dehydration → more ADH.","hard"),
-q("M5","Why is protein absent from normal urine?",["Protein molecules are too large to pass through filtration membrane","Proteins are converted to glucose","Proteins are secreted by bladder","Proteins are all used for ATP"],0,"Large proteins remain in blood and do not enter filtrate.","Large molecule cannot pass.","hard"),
-
-q("M6","Function of nervous system?",["Detects stimuli and coordinates responses","Produces glucose","Filters blood","Stores urine"],0,"Nervous system detects stimuli and coordinates responses.","Stimulus-response system."),
-q("M6","Components of CNS?",["Brain and spinal cord","Heart and lungs","Kidney and bladder","Ovary and uterus"],0,"CNS consists of brain and spinal cord.","CNS = brain + spinal cord."),
-q("M6","Function of sensory neurone?",["Carries impulse from receptor to CNS","Carries impulse from CNS to effector","Produces hormone","Destroys pathogen"],0,"Sensory neurone carries impulse to CNS.","Sensory = to CNS."),
-q("M6","Function of motor neurone?",["Carries impulse from CNS to effector","Carries impulse from receptor to CNS","Produces glucose","Filters blood"],0,"Motor neurone carries impulse from CNS to effector.","Motor = to muscle/effector."),
-q("M6","What is reflex action?",["Rapid automatic response to stimulus","Slow hormone response only","Production of antibodies","Blood clotting"],0,"Reflex action is a rapid automatic response to stimulus.","Rapid + automatic."),
-q("M6","Correct reflex arc order?",["Receptor → sensory neurone → relay neurone → motor neurone → effector","Effector → motor → receptor → sensory","Brain → kidney → bladder","Glucose → insulin → oxygen"],0,"Correct reflex arc sequence must be memorised.","Receptor starts, effector ends."),
-q("M6","Function of insulin?",["Lowers blood glucose level","Raises blood glucose level","Absorbs light","Carries oxygen"],0,"Insulin lowers blood glucose level.","Insulin lowers."),
-q("M6","What is homeostasis?",["Maintenance of stable internal environment","Production of gametes","Breakdown of glucose","Grouping organisms"],0,"Homeostasis maintains a stable internal environment.","Stable internal condition."),
-q("M6","Why is hand withdrawal from hot object fast?",["Impulse travels through spinal cord without conscious brain processing","Hormones travel through blood","Insulin lowers glucose","ADH acts on kidney"],0,"Reflex action uses spinal cord pathway for rapid response.","Reflex arc is faster than conscious response.","hard"),
-q("M6","After a meal, blood glucose rises. What happens next?",["Pancreas secretes insulin; cells absorb glucose","Pancreas secretes glucagon; glucose increases","ADH decreases water reabsorption","Adrenaline lowers heart rate"],0,"Insulin is secreted, cells absorb glucose, blood glucose returns to normal.","High glucose → insulin.","hard"),
-
-q("M7","Function of testes?",["Produce sperm and testosterone","Produce ovum","Site of implantation","Stores urine"],0,"Testes produce sperm and testosterone.","Male gamete + male hormone."),
-q("M7","Function of ovary?",["Produces ovum, oestrogen and progesterone","Produces sperm","Filters blood","Carries semen"],0,"Ovary produces ova and female hormones.","Ovary = ovum + hormones."),
-q("M7","Site of fertilisation?",["Fallopian tube","Uterus","Vagina","Ovary"],0,"Fertilisation occurs in the fallopian tube.","Not uterus."),
-q("M7","Site of implantation?",["Uterus","Fallopian tube","Testis","Urethra"],0,"Implantation occurs in the uterus.","Embryo attaches to uterine wall."),
-q("M7","What is fertilisation?",["Fusion of sperm and ovum to form zygote","Release of ovum","Attachment of embryo","Breakdown of glucose"],0,"Fertilisation is fusion of sperm and ovum to form zygote.","Fusion + zygote."),
-q("M7","Average menstrual cycle?",["28 days","7 days","45 seconds","9 months"],0,"Average menstrual cycle is about 28 days.","Common SPM value."),
-q("M7","When does ovulation usually occur?",["Day 14","Day 1","Day 28","After birth"],0,"Ovulation usually occurs around day 14.","Mid-cycle."),
-q("M7","Function of placenta?",["Exchange nutrients, oxygen and wastes between mother and foetus","Produce sperm","Filter blood to urine","Absorb light"],0,"Placenta exchanges substances between mother and foetus.","Exchange organ."),
-q("M7","Why does fertilisation restore diploid chromosome number?",["Haploid sperm fuses with haploid ovum","Diploid sperm divides by mitosis","Ovum loses all chromosomes","Embryo implants in ovary"],0,"Two haploid gametes fuse to form a diploid zygote.","n + n = 2n.","hard"),
-q("M7","Why is placenta important during pregnancy?",["It exchanges oxygen, nutrients and wastes","It produces sperm","It is the site of fertilisation","It releases ovum every 28 days"],0,"Placenta supplies oxygen/nutrients and removes wastes.","Mother-foetus exchange.","hard"),
-
-q("M8","What is biodiversity?",["Variety of living organisms in an area","One species only","Movement of water","Production of insulin"],0,"Biodiversity means variety of living organisms.","Variety is the key word."),
-q("M8","Three levels of biodiversity?",["Genetic, species and ecosystem diversity","Cell, tissue and organ","Artery, vein and capillary","Insulin, glucagon and ADH"],0,"Three levels: genetic, species, ecosystem.","Memorise all three."),
-q("M8","What is an ecosystem?",["Interaction between organisms and their environment","Only animals in a zoo","Only plants in a forest","A single gene"],0,"Ecosystem is interaction between organisms and environment.","Living + non-living interaction."),
-q("M8","Biotic factor means?",["Living component","Non-living component","Energy currency","Foreign gene"],0,"Biotic means living component.","Bio = life."),
-q("M8","Abiotic factor means?",["Non-living component","Living component","Gamete","Hormone"],0,"Abiotic means non-living component.","A-biotic = non-living."),
-q("M8","Function of decomposers?",["Recycle nutrients","Produce sperm","Pump blood","Absorb light"],0,"Decomposers recycle nutrients back to ecosystem.","Bacteria/fungi decompose."),
-q("M8","What is in-situ conservation?",["Conservation in natural habitat","Conservation outside natural habitat","Genetic engineering","Anaerobic respiration"],0,"In-situ means conservation in natural habitat.","In original place."),
-q("M8","What is ex-situ conservation?",["Conservation outside natural habitat","Conservation in natural habitat","Food chain","Osmosis"],0,"Ex-situ means conservation outside natural habitat.","Zoo/seed bank."),
-q("M8","Why is a food web more stable than a food chain?",["Organisms have alternative food sources","Energy flows backwards","There are no predators","All organisms are decomposers"],0,"Food web has alternative feeding relationships.","Many paths = more stable.","hard"),
-q("M8","Why can deforestation reduce biodiversity?",["It destroys habitats and causes species loss","It increases decomposers only","It increases all food chains","It creates more chromosomes"],0,"Deforestation destroys habitats and reduces species variety.","Habitat loss causes biodiversity loss.","hard"),
-
-q("M9","What is biotechnology?",["Use of living organisms or components to produce useful products","Study of only rocks","Movement of water","Blood circulation"],0,"Biotechnology uses living organisms or components to produce useful products.","Living organisms + useful products."),
-q("M9","What is fermentation?",["Anaerobic breakdown of sugar by microorganisms","Aerobic respiration in mitochondria","Fusion of gametes","Formation of urine"],0,"Fermentation is anaerobic breakdown of sugar by microorganisms.","No oxygen."),
-q("M9","Microorganism used in bread making?",["Yeast","Lactobacillus","Penicillium only","E. coli only"],0,"Yeast produces CO2 to make dough rise.","Bread = yeast."),
-q("M9","Microorganism used to make yoghurt?",["Lactobacillus bacteria","Yeast","Virus","Mosquito"],0,"Lactobacillus converts lactose to lactic acid.","Yoghurt = Lactobacillus."),
-q("M9","What is genetic engineering?",["Manipulation of genes to produce desired characteristics","Grouping species","Blood clotting","Plant wilting"],0,"Genetic engineering manipulates genes.","Genes are changed/manipulated."),
-q("M9","What is recombinant DNA?",["DNA formed by joining DNA from different organisms","DNA with no gene","ATP molecule","Blood plasma"],0,"Recombinant DNA is DNA formed by joining DNA from different organisms.","Combined DNA."),
-q("M9","Function of plasmid in genetic engineering?",["Vector to transfer gene","Digest starch","Absorb light","Carry oxygen"],0,"Plasmid acts as a vector to transfer gene.","Vector = carrier."),
-q("M9","What is cloning?",["Production of genetically identical organisms","Production of different gametes","Breakdown of sugar","Classification"],0,"Cloning produces genetically identical organisms.","Identical copies."),
-q("M9","Why is sterile technique important in tissue culture?",["To prevent contamination by microorganisms","To increase oxygen in plants","To make sperm motile","To produce ADH"],0,"Sterile conditions prevent contamination.","Nutrient medium can grow unwanted microbes.","hard"),
-q("M9","Why is plasmid important in genetic engineering?",["It acts as a vector to carry the desired gene into bacteria","It digests glucose","It produces oxygen","It lowers blood glucose"],0,"Plasmid carries the desired gene into host cells.","Plasmid = gene carrier.","hard"),
-
-q("M10","What is a hypothesis?",["Prediction relating manipulated and responding variables","What is seen only","Variable kept constant","Final score"],0,"Hypothesis links manipulated and responding variables.","Prediction before experiment."),
-q("M10","Manipulated variable?",["Variable changed","Variable measured","Variable kept constant","Unrelated variable"],0,"Manipulated variable is changed by the researcher.","Changed variable."),
-q("M10","Responding variable?",["Variable measured","Variable changed","Variable kept constant","Control set-up"],0,"Responding variable is measured.","Measured result."),
-q("M10","Controlled variable?",["Variable kept constant","Variable measured","Variable changed","Hypothesis"],0,"Controlled variable is kept constant.","Fair test condition."),
-q("M10","Purpose of control set-up?",["For comparison to ensure fair test","To increase marks only","To change all variables","To remove results"],0,"Control set-up is used for comparison.","Comparison group."),
-q("M10","Observation means?",["What is seen or measured","Reason for what happens","Prediction before experiment","Biological theory only"],0,"Observation is what is seen or measured.","See/measure/record."),
-q("M10","Inference means?",["Logical explanation based on observation","What is seen only","Variable changed","Question number"],0,"Inference is a logical explanation based on observation.","Why it happened."),
-q("M10","How to answer graph trend?",["Describe trend, quote data, then explain biologically","Only write conclusion","Only draw diagram","Ignore units"],0,"Graph answers should include trend, data and biological reason.","Trend + data + reason."),
-q("M10","Graph shows photosynthesis rate increases then becomes constant. Why constant?",["Another factor becomes limiting","The plant dies immediately","Light is no longer absorbed at all","Osmosis stops"],0,"At high light intensity, another factor such as CO2 or temperature becomes limiting.","Limiting factor concept.","hard"),
-q("M10","Temperature is changed and enzyme activity measured. What is responding variable?",["Enzyme activity","Temperature","Type of enzyme kept constant","Volume of solution kept constant"],0,"Responding variable is what is measured: enzyme activity.","Changed = manipulated; measured = responding.","hard")
-];
+const BANK=makeBank();
 
 let selected=[],questions=[],idx=0,score=0,answered=false,timer=null,timeLeft=60,history=[];
 
@@ -258,41 +282,31 @@ const grid=document.getElementById("moduleGrid");
 MODULES.forEach(m=>{
 const label=document.createElement("label");
 label.className="module";
-label.innerHTML=`<input type="checkbox" value="${m[0]}"><div><strong>${m[0]} — ${m[1]}</strong><span>${m[2]}</span></div>`;
+label.innerHTML=`<input type="checkbox" value="${m[0]}"><div><strong>${m[0]} — ${m[1]}</strong><span>${m[2]}</span><span>100 unique questions</span></div>`;
 grid.appendChild(label);
 });
 }
-
 function selectAll(){document.querySelectorAll(".module input").forEach(i=>i.checked=true)}
 function clearAll(){document.querySelectorAll(".module input").forEach(i=>i.checked=false)}
 function shuffle(a){return[...a].sort(()=>Math.random()-0.5)}
 
 function buildSessionQuestions(selectedModules,count){
 let pool=BANK.filter(x=>selectedModules.includes(x.module));
-let unique=[];
-let seen=new Set();
-for(const item of shuffle(pool)){
-if(!seen.has(item.id)){seen.add(item.id);unique.push(item);}
-}
+let seen=new Set(),unique=[];
+for(const item of shuffle(pool)){if(!seen.has(item.id)){seen.add(item.id);unique.push(item)}}
 let hard=unique.filter(x=>x.difficulty==="hard");
 let standard=unique.filter(x=>x.difficulty!=="hard");
 let hardTarget=Math.min(hard.length,Math.round(count*0.2));
 let session=[...shuffle(hard).slice(0,hardTarget),...shuffle(standard).slice(0,count-hardTarget)];
-session=shuffle(session).slice(0,count);
-if(session.length<count){
-alert("Not enough unique questions for the selected module(s). Select more modules or choose fewer questions.");
-return null;
-}
-return session;
+return shuffle(session).slice(0,count);
 }
 
 function startQuiz(){
 selected=[...document.querySelectorAll(".module input:checked")].map(i=>i.value);
 if(!selected.length){alert("Choose at least one module.");return}
 const count=parseInt(document.getElementById("count").value);
-const built=buildSessionQuestions(selected,count);
-if(!built)return;
-questions=built;idx=0;score=0;history=[];
+questions=buildSessionQuestions(selected,count);
+idx=0;score=0;history=[];
 document.getElementById("intro").style.display="none";
 document.getElementById("results").style.display="none";
 document.getElementById("quiz").style.display="block";
@@ -312,10 +326,10 @@ document.getElementById("hintBox").innerHTML="";
 document.getElementById("explain").style.display="none";
 document.getElementById("explain").innerHTML="";
 document.getElementById("nextBtn").disabled=true;
-
-const opts=document.getElementById("options");
-opts.innerHTML="";
-q.options.forEach((op,i)=>{
+const opts=document.getElementById("options");opts.innerHTML="";
+const choices=shuffle([q.answer,...q.d]);
+q.correctIndex=choices.indexOf(q.answer);
+choices.forEach((op,i)=>{
 const d=document.createElement("div");
 d.className="option";
 d.textContent=op;
@@ -331,32 +345,22 @@ const t=document.getElementById("timer");
 t.classList.remove("low");
 t.textContent=timeLeft;
 timer=setInterval(()=>{
-timeLeft--;
-t.textContent=timeLeft;
+timeLeft--;t.textContent=timeLeft;
 if(timeLeft<=10)t.classList.add("low");
-if(timeLeft<=0){clearInterval(timer);markTimeout();}
+if(timeLeft<=0){clearInterval(timer);markTimeout()}
 },1000);
 }
 
 function choose(i){
 if(answered)return;
-answered=true;
-clearInterval(timer);
+answered=true;clearInterval(timer);
 const q=questions[idx];
-const correct=i===q.answer;
+const correct=i===q.correctIndex;
 if(correct)score++;
-
 [...document.querySelectorAll(".option")].forEach((o,j)=>{
-if(j===q.answer){
-o.classList.add("correct");
-o.innerHTML=o.textContent+' <span class="signal ok">✓ Correct answer</span>';
-}
-if(j===i&&j!==q.answer){
-o.classList.add("wrong");
-o.innerHTML=o.textContent+' <span class="signal bad">✗ Your answer</span>';
-}
+if(j===q.correctIndex){o.classList.add("correct");o.innerHTML=o.textContent+' <span class="signal ok">✓ Correct answer</span>'}
+if(j===i&&j!==q.correctIndex){o.classList.add("wrong");o.innerHTML=o.textContent+' <span class="signal bad">✗ Your answer</span>'}
 });
-
 history.push({q,chosen:i,correct});
 document.getElementById("explain").style.display="block";
 document.getElementById("explain").innerHTML=`<span class="keyword">${correct?"Correct.":"Incorrect."}</span><br>${q.explanation}`;
@@ -376,19 +380,15 @@ if(answered)return;
 answered=true;
 const q=questions[idx];
 [...document.querySelectorAll(".option")].forEach((o,j)=>{
-if(j===q.answer){
-o.classList.add("correct");
-o.innerHTML=o.textContent+' <span class="signal ok">✓ Correct answer</span>';
-}
+if(j===q.correctIndex){o.classList.add("correct");o.innerHTML=o.textContent+' <span class="signal ok">✓ Correct answer</span>'}
 });
 history.push({q,chosen:null,correct:false});
 document.getElementById("explain").style.display="block";
 document.getElementById("explain").innerHTML=`<span class="keyword">Time up.</span><br>${q.explanation}`;
 document.getElementById("nextBtn").disabled=false;
 }
-
-function skipQuestion(){markTimeout();}
-function nextQuestion(){idx<questions.length-1?(idx++,showQuestion()):endQuiz();}
+function skipQuestion(){markTimeout()}
+function nextQuestion(){idx<questions.length-1?(idx++,showQuestion()):endQuiz()}
 
 function endQuiz(){
 clearInterval(timer);
@@ -396,24 +396,17 @@ document.getElementById("quiz").style.display="none";
 document.getElementById("results").style.display="block";
 const pct=Math.round((score/questions.length)*100);
 document.getElementById("score").textContent=`${score}/${questions.length} (${pct}%)`;
-
 const byModule={};
-history.forEach(h=>{
-byModule[h.q.module]??={ok:0,total:0};
-byModule[h.q.module].total++;
-if(h.correct)byModule[h.q.module].ok++;
-});
+history.forEach(h=>{byModule[h.q.module]??={ok:0,total:0};byModule[h.q.module].total++;if(h.correct)byModule[h.q.module].ok++});
 document.getElementById("summary").innerHTML=Object.entries(byModule).map(([k,v])=>{
 const m=MODULES.find(x=>x[0]===k);
 return `<div class="badge">${m[0]} ${m[1]}: ${v.ok}/${v.total}</div>`;
 }).join(" ");
-
 document.getElementById("review").innerHTML=history.map((h,n)=>`
 <div class="reviewItem">
 <div class="small">${n+1}. ${h.q.module}</div>
 <strong>${h.q.stem}</strong><br>
-Your answer: ${h.chosen===null?'<span class="keyword">Time up / skipped</span>':h.q.options[h.chosen]}<br>
-Correct answer: <span class="keyword">${h.q.options[h.q.answer]}</span><br>
+Correct answer: <span class="keyword">${h.q.answer}</span><br>
 <span class="small">${h.q.explanation}</span>
 </div>`).join("");
 }
@@ -422,7 +415,6 @@ function restart(){
 document.getElementById("results").style.display="none";
 document.getElementById("intro").style.display="block";
 }
-
 init();
 </script>
 </body>
