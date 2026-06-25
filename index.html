@@ -5,45 +5,18 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>SPM Biology Sprint Quiz</title>
 <style>
-:root{--bg:#07111f;--card:#111c2e;--text:#eef6ff;--muted:#a9b8cf;--accent:#3dd6c6;--accent2:#7aa7ff;--danger:#ff5f6d;--ok:#37d67a;--warn:#ffd166;--border:rgba(255,255,255,.12)}
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:radial-gradient(circle at top,#152846 0,#07111f 45%,#04070d 100%);color:var(--text)}
-.app{max-width:1180px;margin:auto;padding:24px}
-.panel{background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.03));border:1px solid var(--border);border-radius:24px;padding:22px;box-shadow:0 18px 45px rgba(0,0,0,.25)}
-.hero{display:grid;grid-template-columns:1.3fr .7fr;gap:18px}
-h1{font-size:38px;margin:0 0 8px}h2{margin:0 0 16px}
-.sub,.small{color:var(--muted);line-height:1.5}.small{font-size:13px}
-.badges,.row{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-.badge{padding:8px 12px;border-radius:999px;background:rgba(61,214,198,.12);border:1px solid rgba(61,214,198,.3);color:#bdfdf5;font-weight:700;font-size:13px}
-.controls{display:grid;gap:16px;margin-top:20px}
-.moduleGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.module{padding:12px;border:1px solid var(--border);border-radius:14px;background:rgba(255,255,255,.04);cursor:pointer;display:flex;gap:10px}
-.module strong{display:block;font-size:14px}.module span{display:block;color:var(--muted);font-size:12px;margin-top:2px}
-select,button{font:inherit}
-select{background:#0d1727;color:var(--text);border:1px solid var(--border);border-radius:12px;padding:12px}
-button{border:0;border-radius:14px;padding:13px 18px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#04111d;font-weight:900;cursor:pointer}
-button.secondary{background:#1d2e49;color:var(--text);border:1px solid var(--border)}
-.quiz,.results{display:none}
-.quiz.fullscreen{max-width:980px;margin:auto;padding-top:28px}
-.topbar{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin-bottom:24px}
-.progress{height:12px;background:#10192a;border-radius:999px;overflow:hidden;border:1px solid var(--border)}
-.progress>div{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:.25s}
-.timer{font-size:26px;font-weight:900;padding:10px 14px;border-radius:16px;background:#102039;border:1px solid var(--border);min-width:80px;text-align:center}
-.timer.low{color:var(--danger)}
-.meta{color:var(--accent);font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.06em;margin-top:18px}
-.question{font-size:30px;font-weight:900;line-height:1.35;margin:20px 0}
-.options{display:grid;gap:12px}
-.option{position:relative;padding:18px;border:1px solid var(--border);border-radius:16px;background:rgba(255,255,255,.05);cursor:pointer;line-height:1.35;font-size:18px}
-.option.correct{background:rgba(55,214,122,.15);border-color:var(--ok)}
-.option.wrong{background:rgba(255,95,109,.15);border-color:var(--danger)}
-.signal{float:right;font-weight:900;border-radius:999px;padding:5px 10px;font-size:13px;margin-left:12px}
-.signal.ok{background:rgba(55,214,122,.22);color:#9ff7bd;border:1px solid var(--ok)}
-.signal.bad{background:rgba(255,95,109,.22);color:#ffc3c8;border:1px solid var(--danger)}
-.explain{display:none;margin-top:14px;background:rgba(255,255,255,.06);border:1px solid var(--border);padding:14px;border-radius:16px;color:#dce8ff;line-height:1.5}
-.actions{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
-.score{font-size:42px;font-weight:1000;margin:6px 0}
-.reviewItem{padding:14px;border:1px solid var(--border);border-radius:16px;background:rgba(255,255,255,.04);margin:10px 0}
-.keyword{color:var(--warn);font-weight:900}
+:root{--bg:#07111f;--text:#eef6ff;--muted:#a9b8cf;--accent:#3dd6c6;--accent2:#7aa7ff;--danger:#ff5f6d;--ok:#37d67a;--warn:#ffd166;--border:rgba(255,255,255,.14)}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:radial-gradient(circle at top,#162846,#07111f 48%,#04070d);color:var(--text)}
+.app{max-width:1180px;margin:auto;padding:24px}.panel{background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.03));border:1px solid var(--border);border-radius:24px;padding:22px;box-shadow:0 18px 45px #0006}
+.hero{display:grid;grid-template-columns:1.3fr .7fr;gap:18px}h1{font-size:38px;margin:0 0 8px}h2{margin:0 0 16px}.sub,.small{color:var(--muted);line-height:1.5}.small{font-size:13px}
+.badges,.row{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.badge{padding:8px 12px;border-radius:999px;background:#3dd6c61f;border:1px solid #3dd6c64d;color:#bdfdf5;font-weight:700;font-size:13px}
+.controls{display:grid;gap:16px;margin-top:20px}.moduleGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.module{padding:12px;border:1px solid var(--border);border-radius:14px;background:#fff1;cursor:pointer;display:flex;gap:10px}.module strong{display:block;font-size:14px}.module span{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+select,button{font:inherit}select{background:#0d1727;color:var(--text);border:1px solid var(--border);border-radius:12px;padding:12px}button{border:0;border-radius:14px;padding:13px 18px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#04111d;font-weight:900;cursor:pointer}button.secondary{background:#1d2e49;color:var(--text);border:1px solid var(--border)}
+.quiz,.results{display:none}.quiz.fullscreen{max-width:980px;margin:auto;padding-top:28px}.topbar{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin-bottom:24px}.progress{height:12px;background:#10192a;border-radius:999px;overflow:hidden;border:1px solid var(--border)}.progress>div{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:.25s}
+.timer{font-size:26px;font-weight:900;padding:10px 14px;border-radius:16px;background:#102039;border:1px solid var(--border);min-width:80px;text-align:center}.timer.low{color:var(--danger)}
+.meta{color:var(--accent);font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.06em;margin-top:18px}.question{font-size:30px;font-weight:900;line-height:1.35;margin:20px 0}.options{display:grid;gap:12px}.option{position:relative;padding:18px;border:1px solid var(--border);border-radius:16px;background:#fff1;cursor:pointer;line-height:1.35;font-size:18px}.option.correct{background:#37d67a26;border-color:var(--ok)}.option.wrong{background:#ff5f6d26;border-color:var(--danger)}
+.signal{float:right;font-weight:900;border-radius:999px;padding:5px 10px;font-size:13px;margin-left:12px}.signal.ok{background:#37d67a38;color:#9ff7bd;border:1px solid var(--ok)}.signal.bad{background:#ff5f6d38;color:#ffc3c8;border:1px solid var(--danger)}
+.explain{display:none;margin-top:14px;background:#fff1;border:1px solid var(--border);padding:14px;border-radius:16px;color:#dce8ff;line-height:1.5}.actions{display:flex;justify-content:space-between;gap:10px;margin-top:18px}.score{font-size:42px;font-weight:1000;margin:6px 0}.reviewItem{padding:14px;border:1px solid var(--border);border-radius:16px;background:#fff1;margin:10px 0}.keyword{color:var(--warn);font-weight:900}
 @media(max-width:850px){.hero{grid-template-columns:1fr}.moduleGrid{grid-template-columns:1fr}.topbar{grid-template-columns:1fr}.question{font-size:22px}h1{font-size:30px}}
 </style>
 </head>
@@ -53,236 +26,225 @@ button.secondary{background:#1d2e49;color:var(--text);border:1px solid var(--bor
 <div class="hero">
 <div class="panel">
 <h1>SPM Biology Sprint Quiz</h1>
-<div class="sub">Timed Malaysia SPM Biology revision. Select modules, choose 20–50 questions, answer within 60 seconds, use hints when stuck, and review mistakes after the session.</div>
-<div class="badges"><div class="badge">60s/question</div><div class="badge">20–50 questions</div><div class="badge">100 unique questions/module</div><div class="badge">20% harder questions</div><div class="badge">No repeated questions/session</div></div>
+<div class="sub">Timed Malaysia SPM Biology revision. Choose English or Bahasa Melayu, select modules, answer within 60 seconds, use hints when stuck, and review mistakes after the session.</div>
+<div class="badges"><div class="badge">English / Bahasa Melayu</div><div class="badge">60s/question</div><div class="badge">100 generated questions/module</div><div class="badge">20% harder questions</div><div class="badge">No repeated questions/session</div></div>
 </div>
 <div class="panel">
 <h2>Session Setup</h2>
+<label>Language / Bahasa:
+<select id="lang"><option value="en">English</option><option value="bm">Bahasa Melayu</option></select>
+</label><br><br>
 <label>Questions:
 <select id="count"><option>20</option><option>30</option><option>40</option><option>50</option></select>
 </label>
-<div class="controls">
-<button onclick="selectAll()">Select all modules</button>
-<button class="secondary" onclick="clearAll()">Clear</button>
-<button onclick="startQuiz()">Start Quiz</button>
-</div>
+<div class="controls"><button onclick="selectAll()">Select all modules</button><button class="secondary" onclick="clearAll()">Clear</button><button onclick="startQuiz()">Start Quiz</button></div>
 </div>
 </div>
 <div class="panel controls" id="setup">
 <h2>Choose Modules</h2>
 <div class="moduleGrid" id="moduleGrid"></div>
-<p class="small">Questions are SPM-style practice questions, not copied past-year questions.</p>
+<p class="small">Questions are SPM-style practice questions, not copied past-year questions. BM terms use formal SPM-style Biology wording where possible.</p>
 </div>
 </div>
 
 <div class="quiz fullscreen" id="quiz">
-<div class="topbar">
-<div><div class="small" id="qnum"></div><div class="progress"><div id="bar"></div></div></div>
-<div class="timer" id="timer">60</div>
-</div>
-<div class="meta" id="moduleName"></div>
-<div class="question" id="question"></div>
-<div class="options" id="options"></div>
-<div class="explain" id="hintBox"></div>
-<div class="explain" id="explain"></div>
-<div class="actions">
-<button class="secondary" onclick="showHint()">Hint</button>
-<button class="secondary" onclick="skipQuestion()">Skip</button>
-<button id="nextBtn" onclick="nextQuestion()" disabled>Next</button>
-</div>
+<div class="topbar"><div><div class="small" id="qnum"></div><div class="progress"><div id="bar"></div></div></div><div class="timer" id="timer">60</div></div>
+<div class="meta" id="moduleName"></div><div class="question" id="question"></div><div class="options" id="options"></div>
+<div class="explain" id="hintBox"></div><div class="explain" id="explain"></div>
+<div class="actions"><button class="secondary" onclick="showHint()">Hint / Petunjuk</button><button class="secondary" onclick="skipQuestion()">Skip / Langkau</button><button id="nextBtn" onclick="nextQuestion()" disabled>Next / Seterusnya</button></div>
 </div>
 
 <div class="results panel" id="results">
-<h2>Results</h2>
-<div class="score" id="score"></div>
-<div id="summary"></div>
-<div class="row"><button onclick="restart()">New Session</button></div>
-<h2 style="margin-top:22px">Review</h2>
-<div id="review"></div>
+<h2>Results / Keputusan</h2><div class="score" id="score"></div><div id="summary"></div><div class="row"><button onclick="restart()">New Session / Sesi Baharu</button></div><h2 style="margin-top:22px">Review / Semakan</h2><div id="review"></div>
 </div>
 </div>
 
 <script>
 const MODULES=[
-["M1","Cell Foundation","Cell biology, chemical composition, membrane, enzymes"],
-["M2","Energy","Cellular respiration and photosynthesis"],
-["M3","Cell Reproduction","Mitosis, meiosis, chromosome number"],
-["M4","Human Transport","Blood, heart, vessels, circulation"],
-["M5","Excretory System","Kidney, nephron, urine formation, ADH"],
-["M6","Coordination & Response","Nervous system, hormones, homeostasis"],
-["M7","Reproduction","Human reproduction, gametes, cycle, fertilisation"],
-["M8","Biodiversity & Ecology","Classification, ecosystem, conservation"],
-["M9","Biotechnology","Fermentation, genetic engineering, cloning"],
-["M10","Exam Mastery","Variables, graph skills, application questions"]
+["M1","Cell Foundation","Asas Sel","Cell biology, chemical composition, membrane, enzymes","Biologi sel, komposisi kimia, membran, enzim"],
+["M2","Energy","Tenaga","Cellular respiration and photosynthesis","Respirasi sel dan fotosintesis"],
+["M3","Cell Reproduction","Pembiakan Sel","Mitosis, meiosis, chromosome number","Mitosis, meiosis, bilangan kromosom"],
+["M4","Human Transport","Pengangkutan Manusia","Blood, heart, vessels, circulation","Darah, jantung, salur darah, peredaran"],
+["M5","Excretory System","Sistem Perkumuhan","Kidney, nephron, urine formation, ADH","Ginjal, nefron, pembentukan air kencing, ADH"],
+["M6","Coordination & Response","Koordinasi dan Gerak Balas","Nervous system, hormones, homeostasis","Sistem saraf, hormon, homeostasis"],
+["M7","Reproduction","Pembiakan","Human reproduction, gametes, cycle, fertilisation","Pembiakan manusia, gamet, kitar haid, persenyawaan"],
+["M8","Biodiversity & Ecology","Biodiversiti dan Ekologi","Classification, ecosystem, conservation","Pengelasan, ekosistem, pemuliharaan"],
+["M9","Biotechnology","Bioteknologi","Fermentation, genetic engineering, cloning","Penapaian, kejuruteraan genetik, pengklonan"],
+["M10","Exam Mastery","Kemahiran Peperiksaan","Variables, graph skills, application questions","Pemboleh ubah, kemahiran graf, soalan aplikasi"]
 ];
 
 const ITEMS={
 M1:[
-["cell","Basic structural and functional unit of life",["A tissue that forms organs","A molecule that stores energy","A chemical catalyst"],"A cell is the basic structural and functional unit of life.","Remember structural + functional unit."],
-["mitochondrion","Site of aerobic respiration to produce ATP",["Site of protein synthesis","Controls osmosis only","Stores urine"],"Mitochondrion produces ATP through aerobic respiration.","Powerhouse of the cell."],
-["ribosome","Site of protein synthesis",["Site of photosynthesis","Stores water","Filters blood"],"Ribosomes make proteins.","Think protein production."],
-["osmosis","Movement of water from high to low water potential through a partially permeable membrane",["Movement of particles using ATP","Movement of oxygen in blood","Breaking down glucose"],"Osmosis involves water, water potential and a partially permeable membrane.","Water + membrane + water potential."],
-["diffusion","Movement of particles from high to low concentration",["Movement from low to high concentration","Movement of water only","Requires ATP"],"Diffusion does not require energy.","High to low concentration."],
-["active transport","Movement from low to high concentration using ATP",["Movement from high to low concentration","Movement of water only","No energy required"],"Active transport uses ATP against a concentration gradient.","Against gradient = ATP."],
-["enzyme","Biological catalyst",["Energy currency","Blood pigment","Genetic material"],"Enzymes speed up reactions and are not used up.","Shortest answer: biological catalyst."],
-["denaturation","Change in enzyme active site shape due to high temperature or extreme pH",["Formation of ATP","Movement of water","Blood clotting"],"Denatured enzymes lose their active site shape.","Heat changes protein shape."],
-["plasma membrane","Selectively permeable membrane controlling movement of substances",["Rigid cell wall only","Site of photosynthesis","Stores genetic material"],"The plasma membrane controls entry and exit of substances.","Selectively permeable."],
-["nucleus","Controls cell activities and contains genetic material",["Produces ATP","Carries oxygen","Stores urine"],"The nucleus contains DNA and controls cell activities.","Control centre of cell."]
+["cell","sel","Basic structural and functional unit of life","Unit struktur dan fungsi asas bagi kehidupan",["A tissue that forms organs","A molecule that stores energy","A chemical catalyst"],["Tisu yang membentuk organ","Molekul yang menyimpan tenaga","Pemangkin kimia"],"A cell is the basic structural and functional unit of life.","Sel ialah unit struktur dan fungsi asas bagi kehidupan.","Remember structural + functional unit.","Ingat: unit struktur + unit fungsi."],
+["mitochondrion","mitokondrion","Site of aerobic respiration to produce ATP","Tapak respirasi aerob untuk menghasilkan ATP",["Site of protein synthesis","Controls osmosis only","Stores urine"],["Tapak sintesis protein","Mengawal osmosis sahaja","Menyimpan air kencing"],"Mitochondrion produces ATP through aerobic respiration.","Mitokondrion menghasilkan ATP melalui respirasi aerob.","Powerhouse of the cell.","Pusat penghasilan tenaga sel."],
+["ribosome","ribosom","Site of protein synthesis","Tapak sintesis protein",["Site of photosynthesis","Stores water","Filters blood"],["Tapak fotosintesis","Menyimpan air","Menuras darah"],"Ribosomes make proteins.","Ribosom menghasilkan protein.","Think protein production.","Fikirkan penghasilan protein."],
+["osmosis","osmosis","Movement of water from high to low water potential through a partially permeable membrane","Pergerakan molekul air dari keupayaan air tinggi ke keupayaan air rendah melalui membran separa telap",["Movement of particles using ATP","Movement of oxygen in blood","Breaking down glucose"],["Pergerakan zarah menggunakan ATP","Pergerakan oksigen dalam darah","Penguraian glukosa"],"Osmosis involves water, water potential and a partially permeable membrane.","Osmosis melibatkan air, keupayaan air dan membran separa telap.","Water + membrane + water potential.","Air + membran + keupayaan air."],
+["diffusion","resapan","Movement of particles from high to low concentration","Pergerakan zarah dari kawasan berkepekatan tinggi ke kawasan berkepekatan rendah",["Movement from low to high concentration","Movement of water only","Requires ATP"],["Pergerakan dari kepekatan rendah ke tinggi","Pergerakan air sahaja","Memerlukan ATP"],"Diffusion does not require energy.","Resapan tidak memerlukan tenaga.","High to low concentration.","Kepekatan tinggi ke rendah."],
+["active transport","pengangkutan aktif","Movement from low to high concentration using ATP","Pergerakan bahan dari kepekatan rendah ke kepekatan tinggi menggunakan ATP",["Movement from high to low concentration","Movement of water only","No energy required"],["Pergerakan dari kepekatan tinggi ke rendah","Pergerakan air sahaja","Tidak memerlukan tenaga"],"Active transport uses ATP against a concentration gradient.","Pengangkutan aktif menggunakan ATP menentang kecerunan kepekatan.","Against gradient = ATP.","Menentang kecerunan = ATP."],
+["enzyme","enzim","Biological catalyst","Mangkin biologi",["Energy currency","Blood pigment","Genetic material"],["Mata wang tenaga","Pigmen darah","Bahan genetik"],"Enzymes speed up reactions and are not used up.","Enzim mempercepat tindak balas dan tidak digunakan habis.","Shortest answer: biological catalyst.","Jawapan ringkas: mangkin biologi."],
+["denaturation","penyahhasilan / ternyahasli","Change in enzyme active site shape due to high temperature or extreme pH","Perubahan bentuk tapak aktif enzim akibat suhu tinggi atau pH melampau",["Formation of ATP","Movement of water","Blood clotting"],["Pembentukan ATP","Pergerakan air","Pembekuan darah"],"Denatured enzymes lose their active site shape.","Enzim yang ternyahasli kehilangan bentuk tapak aktif.","Heat changes active site.","Haba mengubah tapak aktif."],
+["plasma membrane","membran plasma","Selectively permeable membrane controlling movement of substances","Membran telap memilih yang mengawal pergerakan bahan",["Rigid cell wall only","Site of photosynthesis","Stores genetic material"],["Dinding sel tegar sahaja","Tapak fotosintesis","Menyimpan bahan genetik"],"The plasma membrane controls entry and exit of substances.","Membran plasma mengawal kemasukan dan keluaran bahan.","Selectively permeable.","Telap memilih."],
+["nucleus","nukleus","Controls cell activities and contains genetic material","Mengawal aktiviti sel dan mengandungi bahan genetik",["Produces ATP","Carries oxygen","Stores urine"],["Menghasilkan ATP","Mengangkut oksigen","Menyimpan air kencing"],"The nucleus contains DNA and controls cell activities.","Nukleus mengandungi DNA dan mengawal aktiviti sel.","Control centre of cell.","Pusat kawalan sel."]
 ],
 M2:[
-["cellular respiration","Breakdown of glucose to release ATP",["Production of glucose using light","Movement of water","Production of sperm"],"Respiration breaks down glucose to release ATP.","Glucose releases energy."],
-["aerobic respiration site","Mitochondrion",["Chloroplast","Nucleus","Ribosome"],"Aerobic respiration occurs in mitochondria.","Respiration = mitochondrion."],
-["ATP","Energy currency of the cell",["Genetic code","Blood protein","Digestive enzyme"],"ATP supplies energy for cellular activities.","ATP = energy currency."],
-["photosynthesis","Process where plants use light energy to produce glucose",["Breakdown of glucose","Formation of urine","Transport of oxygen"],"Photosynthesis produces glucose using light energy.","Plants make glucose."],
-["photosynthesis site","Chloroplast",["Mitochondrion","Kidney","Testis"],"Photosynthesis occurs in chloroplasts.","Photosynthesis = chloroplast."],
-["chlorophyll","Absorbs light energy",["Produces sperm","Filters blood","Carries oxygen"],"Chlorophyll traps light energy for photosynthesis.","Green pigment absorbs light."],
-["photosynthesis products","Glucose and oxygen",["Carbon dioxide and water","ATP and carbon dioxide","Urea and water"],"Products of photosynthesis are glucose and oxygen.","CO2 + water become glucose + oxygen."],
-["respiration reactants","Glucose and oxygen",["Carbon dioxide and water","Glucose and urea","Oxygen and nitrogen"],"Aerobic respiration uses glucose and oxygen.","Respiration needs glucose and oxygen."],
-["exercise oxygen demand","More oxygen is needed for aerobic respiration to produce more ATP",["Oxygen produces chlorophyll","Oxygen stops osmosis","Oxygen forms urine"],"During exercise, muscles need more ATP.","Exercise needs ATP."],
-["limiting factor in photosynthesis","A factor that limits the rate of photosynthesis",["A hormone that lowers glucose","A blood vessel","A type of gamete"],"Light, carbon dioxide and temperature can become limiting factors.","Rate is limited by the scarcest factor."]
+["cellular respiration","respirasi sel","Breakdown of glucose to release ATP","Penguraian glukosa untuk membebaskan ATP",["Production of glucose using light","Movement of water","Production of sperm"],["Penghasilan glukosa menggunakan cahaya","Pergerakan air","Penghasilan sperma"],"Respiration breaks down glucose to release ATP.","Respirasi menguraikan glukosa untuk membebaskan ATP.","Glucose releases energy.","Glukosa membebaskan tenaga."],
+["aerobic respiration site","tapak respirasi aerob","Mitochondrion","Mitokondrion",["Chloroplast","Nucleus","Ribosome"],["Kloroplas","Nukleus","Ribosom"],"Aerobic respiration occurs in mitochondria.","Respirasi aerob berlaku dalam mitokondrion.","Respiration = mitochondrion.","Respirasi = mitokondrion."],
+["ATP","ATP","Energy currency of the cell","Mata wang tenaga sel",["Genetic code","Blood protein","Digestive enzyme"],["Kod genetik","Protein darah","Enzim pencernaan"],"ATP supplies energy for cellular activities.","ATP membekalkan tenaga untuk aktiviti sel.","ATP = energy currency.","ATP = mata wang tenaga."],
+["photosynthesis","fotosintesis","Process where plants use light energy to produce glucose","Proses tumbuhan menggunakan tenaga cahaya untuk menghasilkan glukosa",["Breakdown of glucose","Formation of urine","Transport of oxygen"],["Penguraian glukosa","Pembentukan air kencing","Pengangkutan oksigen"],"Photosynthesis produces glucose using light energy.","Fotosintesis menghasilkan glukosa menggunakan tenaga cahaya.","Plants make glucose.","Tumbuhan menghasilkan glukosa."],
+["photosynthesis site","tapak fotosintesis","Chloroplast","Kloroplas",["Mitochondrion","Kidney","Testis"],["Mitokondrion","Ginjal","Testis"],"Photosynthesis occurs in chloroplasts.","Fotosintesis berlaku dalam kloroplas.","Photosynthesis = chloroplast.","Fotosintesis = kloroplas."],
+["chlorophyll","klorofil","Absorbs light energy","Menyerap tenaga cahaya",["Produces sperm","Filters blood","Carries oxygen"],["Menghasilkan sperma","Menuras darah","Mengangkut oksigen"],"Chlorophyll traps light energy for photosynthesis.","Klorofil memerangkap tenaga cahaya untuk fotosintesis.","Green pigment absorbs light.","Pigmen hijau menyerap cahaya."],
+["photosynthesis products","hasil fotosintesis","Glucose and oxygen","Glukosa dan oksigen",["Carbon dioxide and water","ATP and carbon dioxide","Urea and water"],["Karbon dioksida dan air","ATP dan karbon dioksida","Urea dan air"],"Products of photosynthesis are glucose and oxygen.","Hasil fotosintesis ialah glukosa dan oksigen.","CO2 + water become glucose + oxygen.","CO2 + air menjadi glukosa + oksigen."],
+["respiration reactants","bahan tindak balas respirasi","Glucose and oxygen","Glukosa dan oksigen",["Carbon dioxide and water","Glucose and urea","Oxygen and nitrogen"],["Karbon dioksida dan air","Glukosa dan urea","Oksigen dan nitrogen"],"Aerobic respiration uses glucose and oxygen.","Respirasi aerob menggunakan glukosa dan oksigen.","Respiration needs glucose and oxygen.","Respirasi memerlukan glukosa dan oksigen."],
+["exercise oxygen demand","keperluan oksigen semasa senaman","More oxygen is needed for aerobic respiration to produce more ATP","Lebih banyak oksigen diperlukan untuk respirasi aerob bagi menghasilkan lebih banyak ATP",["Oxygen produces chlorophyll","Oxygen stops osmosis","Oxygen forms urine"],["Oksigen menghasilkan klorofil","Oksigen menghentikan osmosis","Oksigen membentuk air kencing"],"During exercise, muscles need more ATP.","Semasa senaman, otot memerlukan lebih banyak ATP.","Exercise needs ATP.","Senaman memerlukan ATP."],
+["limiting factor in photosynthesis","faktor pengehad dalam fotosintesis","A factor that limits the rate of photosynthesis","Faktor yang mengehadkan kadar fotosintesis",["A hormone that lowers glucose","A blood vessel","A type of gamete"],["Hormon yang merendahkan glukosa","Salur darah","Sejenis gamet"],"Light, carbon dioxide and temperature can become limiting factors.","Cahaya, karbon dioksida dan suhu boleh menjadi faktor pengehad.","Scarcest factor limits rate.","Faktor paling kurang mengehadkan kadar."]
 ],
 M3:[
-["mitosis","Cell division producing two genetically identical diploid daughter cells",["Produces four haploid cells","Fusion of gametes","Breakdown of glucose"],"Mitosis produces two identical diploid cells.","2 identical 2n cells."],
-["meiosis","Cell division producing four genetically different haploid cells",["Produces two identical cells","Forms urine","Moves water"],"Meiosis produces gametes.","4 different n cells."],
-["somatic cells","Body cells where mitosis occurs",["Gametes","Bacteria only","Urine"],"Mitosis occurs in somatic cells.","Body cells = somatic cells."],
-["germ cells","Cells in reproductive organs that undergo meiosis",["Skin cells","Red blood cells","Nephrons"],"Meiosis occurs in germ cells.","Gamete formation."],
-["diploid","Cell containing two sets of chromosomes",["One set of chromosomes","No chromosomes","Only proteins"],"Diploid is written as 2n.","2n."],
-["haploid","Cell containing one set of chromosomes",["Two sets of chromosomes","No nucleus","Only cytoplasm"],"Haploid is written as n.","n."],
-["crossing over","Exchange of genetic material between homologous chromosomes",["Blood clotting","Water movement","ATP production"],"Crossing over produces genetic variation.","Meiosis variation."],
-["metaphase","Chromosomes line up at the equator",["Chromosomes disappear","Cytoplasm divides first","DNA is destroyed"],"In metaphase, chromosomes align at the equator.","Meta = middle."],
-["anaphase","Sister chromatids separate and move to opposite poles",["Chromosomes line up at equator","Nucleus controls cell","Glucose breaks down"],"Anaphase separates chromatids.","Apart = anaphase."],
-["fertilisation chromosome restoration","Haploid gametes fuse to restore diploid chromosome number",["Mitosis doubles chromosomes","Proteins enter urine","ADH absorbs water"],"n + n restores 2n.","n + n = 2n."]
+["mitosis","mitosis","Cell division producing two genetically identical diploid daughter cells","Pembahagian sel yang menghasilkan dua sel anak diploid yang seiras secara genetik",["Produces four haploid cells","Fusion of gametes","Breakdown of glucose"],["Menghasilkan empat sel haploid","Percantuman gamet","Penguraian glukosa"],"Mitosis produces two identical diploid cells.","Mitosis menghasilkan dua sel diploid yang seiras.","2 identical 2n cells.","2 sel seiras 2n."],
+["meiosis","meiosis","Cell division producing four genetically different haploid cells","Pembahagian sel yang menghasilkan empat sel haploid yang berbeza secara genetik",["Produces two identical cells","Forms urine","Moves water"],["Menghasilkan dua sel seiras","Membentuk air kencing","Menggerakkan air"],"Meiosis produces gametes.","Meiosis menghasilkan gamet.","4 different n cells.","4 sel berbeza n."],
+["somatic cells","sel soma","Body cells where mitosis occurs","Sel badan tempat mitosis berlaku",["Gametes","Bacteria only","Urine"],["Gamet","Bakteria sahaja","Air kencing"],"Mitosis occurs in somatic cells.","Mitosis berlaku dalam sel soma.","Body cells = somatic cells.","Sel badan = sel soma."],
+["germ cells","sel germa","Cells in reproductive organs that undergo meiosis","Sel dalam organ pembiakan yang menjalani meiosis",["Skin cells","Red blood cells","Nephrons"],["Sel kulit","Sel darah merah","Nefron"],"Meiosis occurs in germ cells.","Meiosis berlaku dalam sel germa.","Gamete formation.","Pembentukan gamet."],
+["diploid","diploid","Cell containing two sets of chromosomes","Sel yang mengandungi dua set kromosom",["One set of chromosomes","No chromosomes","Only proteins"],["Satu set kromosom","Tiada kromosom","Protein sahaja"],"Diploid is written as 2n.","Diploid ditulis sebagai 2n.","2n.","2n."],
+["haploid","haploid","Cell containing one set of chromosomes","Sel yang mengandungi satu set kromosom",["Two sets of chromosomes","No nucleus","Only cytoplasm"],["Dua set kromosom","Tiada nukleus","Sitoplasma sahaja"],"Haploid is written as n.","Haploid ditulis sebagai n.","n.","n."],
+["crossing over","pindah silang","Exchange of genetic material between homologous chromosomes","Pertukaran bahan genetik antara kromosom homolog",["Blood clotting","Water movement","ATP production"],["Pembekuan darah","Pergerakan air","Penghasilan ATP"],"Crossing over produces genetic variation.","Pindah silang menghasilkan variasi genetik.","Meiosis variation.","Variasi dalam meiosis."],
+["metaphase","metafasa","Chromosomes line up at the equator","Kromosom tersusun di satah khatulistiwa",["Chromosomes disappear","Cytoplasm divides first","DNA is destroyed"],["Kromosom hilang","Sitoplasma membahagi dahulu","DNA dimusnahkan"],"In metaphase, chromosomes align at the equator.","Dalam metafasa, kromosom tersusun di satah khatulistiwa.","Meta = middle.","Meta = tengah."],
+["anaphase","anafasa","Sister chromatids separate and move to opposite poles","Kromatid kembar berpisah dan bergerak ke kutub bertentangan",["Chromosomes line up at equator","Nucleus controls cell","Glucose breaks down"],["Kromosom tersusun di khatulistiwa","Nukleus mengawal sel","Glukosa diuraikan"],"Anaphase separates chromatids.","Anafasa memisahkan kromatid.","Apart = anaphase.","Berpisah = anafasa."],
+["fertilisation chromosome restoration","pemulihan bilangan kromosom semasa persenyawaan","Haploid gametes fuse to restore diploid chromosome number","Gamet haploid bercantum untuk memulihkan bilangan kromosom diploid",["Mitosis doubles chromosomes","Proteins enter urine","ADH absorbs water"],["Mitosis menggandakan kromosom","Protein masuk ke air kencing","ADH menyerap air"],"n + n restores 2n.","n + n memulihkan 2n.","n + n = 2n.","n + n = 2n."]
 ],
 M4:[
-["red blood cells","Transport oxygen using haemoglobin",["Destroy pathogens","Blood clotting","Produce hormones"],"Red blood cells carry oxygen.","Haemoglobin carries oxygen."],
-["white blood cells","Defend the body against pathogens",["Carry oxygen","Store urine","Produce glucose"],"White blood cells are involved in defence.","WBC = immunity."],
-["platelets","Help in blood clotting",["Transport oxygen","Pump blood","Filter blood"],"Platelets help stop bleeding.","Platelets clot blood."],
-["plasma","Transports nutrients, hormones, carbon dioxide and wastes",["Produces sperm","Stores urine","Absorbs light"],"Plasma is the liquid part of blood.","Transport medium."],
-["arteries","Carry blood away from the heart",["Carry blood towards heart","Produce antibodies","Store blood"],"Arteries carry blood away from the heart.","A for away."],
-["veins","Carry blood towards the heart",["Carry blood away from heart","Make oxygen","Break down glucose"],"Veins return blood to the heart.","Veins return."],
-["capillaries","Site of exchange of substances",["Pump blood","Produce red blood cells","Store urine"],"Capillaries have thin walls for exchange.","Exchange happens here."],
-["valves","Prevent backflow of blood",["Produce oxygen","Make antibodies","Filter urea"],"Valves ensure one-way flow of blood.","One-way flow."],
-["double circulation","Blood passes through the heart twice in one complete circulation",["Blood has two colours","Blood flows without heart","Oxygen enters kidney twice"],"Double circulation includes pulmonary and systemic circulation.","Heart-lung-heart-body."],
-["left ventricle","Pumps oxygenated blood to the whole body at high pressure",["Receives deoxygenated blood","Produces plasma","Filters blood"],"The left ventricle has a thick muscular wall.","Pumps to whole body."]
+["red blood cells","sel darah merah","Transport oxygen using haemoglobin","Mengangkut oksigen menggunakan hemoglobin",["Destroy pathogens","Blood clotting","Produce hormones"],["Memusnahkan patogen","Pembekuan darah","Menghasilkan hormon"],"Red blood cells carry oxygen.","Sel darah merah mengangkut oksigen.","Haemoglobin carries oxygen.","Hemoglobin mengangkut oksigen."],
+["white blood cells","sel darah putih","Defend the body against pathogens","Mempertahankan badan daripada patogen",["Carry oxygen","Store urine","Produce glucose"],["Mengangkut oksigen","Menyimpan air kencing","Menghasilkan glukosa"],"White blood cells are involved in defence.","Sel darah putih terlibat dalam pertahanan badan.","WBC = immunity.","Sel darah putih = keimunan."],
+["platelets","platlet","Help in blood clotting","Membantu pembekuan darah",["Transport oxygen","Pump blood","Filter blood"],["Mengangkut oksigen","Mengepam darah","Menuras darah"],"Platelets help stop bleeding.","Platlet membantu menghentikan pendarahan.","Platelets clot blood.","Platlet membekukan darah."],
+["plasma","plasma darah","Transports nutrients, hormones, carbon dioxide and wastes","Mengangkut nutrien, hormon, karbon dioksida dan bahan buangan",["Produces sperm","Stores urine","Absorbs light"],["Menghasilkan sperma","Menyimpan air kencing","Menyerap cahaya"],"Plasma is the liquid part of blood.","Plasma ialah bahagian cecair darah.","Transport medium.","Medium pengangkutan."],
+["arteries","arteri","Carry blood away from the heart","Mengangkut darah keluar dari jantung",["Carry blood towards heart","Produce antibodies","Store blood"],["Mengangkut darah ke jantung","Menghasilkan antibodi","Menyimpan darah"],"Arteries carry blood away from the heart.","Arteri membawa darah keluar dari jantung.","A for away.","Arteri keluar dari jantung."],
+["veins","vena","Carry blood towards the heart","Mengangkut darah kembali ke jantung",["Carry blood away from heart","Make oxygen","Break down glucose"],["Mengangkut darah keluar dari jantung","Menghasilkan oksigen","Menguraikan glukosa"],"Veins return blood to the heart.","Vena membawa darah kembali ke jantung.","Veins return.","Vena kembali ke jantung."],
+["capillaries","kapilari","Site of exchange of substances","Tapak pertukaran bahan",["Pump blood","Produce red blood cells","Store urine"],["Mengepam darah","Menghasilkan sel darah merah","Menyimpan air kencing"],"Capillaries have thin walls for exchange.","Kapilari berdinding nipis untuk pertukaran bahan.","Exchange happens here.","Pertukaran berlaku di sini."],
+["valves","injap","Prevent backflow of blood","Menghalang aliran balik darah",["Produce oxygen","Make antibodies","Filter urea"],["Menghasilkan oksigen","Menghasilkan antibodi","Menuras urea"],"Valves ensure one-way flow of blood.","Injap memastikan aliran darah sehala.","One-way flow.","Aliran sehala."],
+["double circulation","peredaran darah ganda dua","Blood passes through the heart twice in one complete circulation","Darah melalui jantung dua kali dalam satu peredaran lengkap",["Blood has two colours","Blood flows without heart","Oxygen enters kidney twice"],["Darah mempunyai dua warna","Darah mengalir tanpa jantung","Oksigen masuk ginjal dua kali"],"Double circulation includes pulmonary and systemic circulation.","Peredaran ganda dua melibatkan peredaran pulmonari dan sistemik.","Heart-lung-heart-body.","Jantung-paru-paru-jantung-badan."],
+["left ventricle","ventrikel kiri","Pumps oxygenated blood to the whole body at high pressure","Mengepam darah beroksigen ke seluruh badan pada tekanan tinggi",["Receives deoxygenated blood","Produces plasma","Filters blood"],["Menerima darah terdeoksigen","Menghasilkan plasma","Menuras darah"],"The left ventricle has a thick muscular wall.","Ventrikel kiri mempunyai dinding otot yang tebal.","Pumps to whole body.","Mengepam ke seluruh badan."]
 ],
 M5:[
-["kidney","Filters blood and forms urine",["Produces bile","Pumps blood","Produces sperm"],"Kidney filters blood and forms urine.","Main excretory organ."],
-["nephron","Structural and functional unit of kidney",["Energy currency","Male gamete","Blood vessel"],"Nephron forms urine.","Unit of kidney."],
-["ultrafiltration","Filtration of small molecules from blood into Bowman capsule",["Fusion of gametes","Protein synthesis","Photosynthesis"],"Ultrafiltration occurs at glomerulus/Bowman capsule.","Small molecules filtered."],
-["glomerulus","Site where high pressure filtration occurs",["Stores urine","Produces insulin","Absorbs light"],"Blood pressure forces small molecules into Bowman capsule.","Filter knot."],
-["selective reabsorption","Useful substances are reabsorbed into blood",["Waste becomes oxygen","Sperm enters ovum","Blood clots"],"Glucose, amino acids, salts and water may be reabsorbed.","Useful substances return."],
-["proximal convoluted tubule","Main site of selective reabsorption",["Site of fertilisation","Site of photosynthesis","Site of heartbeat"],"PCT reabsorbs useful substances.","PCT is key."],
-["tubular secretion","Unwanted substances are secreted into the nephron",["Food is digested","Gametes fuse","Light is absorbed"],"Tubular secretion helps maintain blood composition.","Waste secreted."],
-["ADH","Increases water reabsorption by kidney",["Lowers blood glucose","Raises blood glucose","Produces sperm"],"ADH helps conserve water.","ADH saves water."],
-["normal urine","Contains water, urea and mineral salts but no glucose, protein or blood cells",["Contains glucose and protein","Contains red blood cells","Contains starch"],"Normal urine should not contain glucose, protein or blood cells.","No glucose/protein/blood cells."],
-["dehydration urine response","More ADH causes more water reabsorption and less urine",["Less ADH causes more water loss","Insulin increases urine","Chlorophyll absorbs urine"],"Dehydration increases ADH.","Dehydration → ADH."]
+["kidney","ginjal","Filters blood and forms urine","Menuras darah dan membentuk air kencing",["Produces bile","Pumps blood","Produces sperm"],["Menghasilkan hempedu","Mengepam darah","Menghasilkan sperma"],"Kidney filters blood and forms urine.","Ginjal menuras darah dan membentuk air kencing.","Main excretory organ.","Organ perkumuhan utama."],
+["nephron","nefron","Structural and functional unit of kidney","Unit struktur dan fungsi ginjal",["Energy currency","Male gamete","Blood vessel"],["Mata wang tenaga","Gamet jantan","Salur darah"],"Nephron forms urine.","Nefron membentuk air kencing.","Unit of kidney.","Unit ginjal."],
+["ultrafiltration","penurasan ultra","Filtration of small molecules from blood into Bowman capsule","Penurasan molekul kecil daripada darah ke dalam kapsul Bowman",["Fusion of gametes","Protein synthesis","Photosynthesis"],["Percantuman gamet","Sintesis protein","Fotosintesis"],"Ultrafiltration occurs at glomerulus/Bowman capsule.","Penurasan ultra berlaku di glomerulus/kapsul Bowman.","Small molecules filtered.","Molekul kecil dituras."],
+["glomerulus","glomerulus","Site where high pressure filtration occurs","Tapak penurasan pada tekanan tinggi",["Stores urine","Produces insulin","Absorbs light"],["Menyimpan air kencing","Menghasilkan insulin","Menyerap cahaya"],"Blood pressure forces small molecules into Bowman capsule.","Tekanan darah menolak molekul kecil ke dalam kapsul Bowman.","Filter knot.","Jaringan penuras."],
+["selective reabsorption","penyerapan semula berpilih","Useful substances are reabsorbed into blood","Bahan berguna diserap semula ke dalam darah",["Waste becomes oxygen","Sperm enters ovum","Blood clots"],["Bahan buangan menjadi oksigen","Sperma masuk ke ovum","Darah membeku"],"Glucose, amino acids, salts and water may be reabsorbed.","Glukosa, asid amino, garam mineral dan air boleh diserap semula.","Useful substances return.","Bahan berguna kembali."],
+["proximal convoluted tubule","tubul berlingkar proksimal","Main site of selective reabsorption","Tapak utama penyerapan semula berpilih",["Site of fertilisation","Site of photosynthesis","Site of heartbeat"],["Tapak persenyawaan","Tapak fotosintesis","Tapak denyutan jantung"],"PCT reabsorbs useful substances.","Tubul berlingkar proksimal menyerap semula bahan berguna.","PCT is key.","TBP penting."],
+["tubular secretion","rembesan tubul","Unwanted substances are secreted into the nephron","Bahan tidak diperlukan dirembeskan ke dalam nefron",["Food is digested","Gametes fuse","Light is absorbed"],["Makanan dicerna","Gamet bercantum","Cahaya diserap"],"Tubular secretion helps maintain blood composition.","Rembesan tubul membantu mengekalkan komposisi darah.","Waste secreted.","Bahan buangan dirembeskan."],
+["ADH","ADH","Increases water reabsorption by kidney","Meningkatkan penyerapan semula air oleh ginjal",["Lowers blood glucose","Raises blood glucose","Produces sperm"],["Menurunkan glukosa darah","Meningkatkan glukosa darah","Menghasilkan sperma"],"ADH helps conserve water.","ADH membantu memelihara air dalam badan.","ADH saves water.","ADH menjimatkan air."],
+["normal urine","air kencing normal","Contains water, urea and mineral salts but no glucose, protein or blood cells","Mengandungi air, urea dan garam mineral tetapi tiada glukosa, protein atau sel darah",["Contains glucose and protein","Contains red blood cells","Contains starch"],["Mengandungi glukosa dan protein","Mengandungi sel darah merah","Mengandungi kanji"],"Normal urine should not contain glucose, protein or blood cells.","Air kencing normal tidak mengandungi glukosa, protein atau sel darah.","No glucose/protein/blood cells.","Tiada glukosa/protein/sel darah."],
+["dehydration urine response","gerak balas air kencing semasa dehidrasi","More ADH causes more water reabsorption and less urine","Lebih banyak ADH menyebabkan lebih banyak air diserap semula dan kurang air kencing dihasilkan",["Less ADH causes more water loss","Insulin increases urine","Chlorophyll absorbs urine"],["Kurang ADH menyebabkan lebih banyak kehilangan air","Insulin meningkatkan air kencing","Klorofil menyerap air kencing"],"Dehydration increases ADH.","Dehidrasi meningkatkan ADH.","Dehydration → ADH.","Dehidrasi → ADH."]
 ],
 M6:[
-["nervous system","Detects stimuli and coordinates responses",["Produces glucose","Filters blood","Stores urine"],"The nervous system coordinates body responses.","Stimulus-response."],
-["central nervous system","Brain and spinal cord",["Heart and lungs","Kidney and bladder","Ovary and uterus"],"CNS consists of brain and spinal cord.","CNS = brain + spinal cord."],
-["sensory neurone","Carries impulse from receptor to CNS",["Carries impulse from CNS to effector","Produces hormone","Destroys pathogen"],"Sensory neurone carries impulse to CNS.","Sensory = to CNS."],
-["motor neurone","Carries impulse from CNS to effector",["Carries impulse to CNS","Produces glucose","Filters blood"],"Motor neurone carries impulse to effector.","Motor = movement."],
-["reflex action","Rapid automatic response to stimulus",["Slow hormone response","Production of antibodies","Blood clotting"],"Reflex action protects the body.","Rapid + automatic."],
-["reflex arc","Receptor to sensory neurone to relay neurone to motor neurone to effector",["Effector to receptor only","Brain to kidney only","Glucose to insulin"],"Reflex arc is the pathway of reflex action.","Receptor starts, effector ends."],
-["insulin","Lowers blood glucose level",["Raises blood glucose","Absorbs light","Carries oxygen"],"Insulin is secreted when blood glucose is high.","Insulin lowers."],
-["glucagon","Raises blood glucose level",["Lowers blood glucose","Forms urine","Absorbs light"],"Glucagon is secreted when blood glucose is low.","Glucagon raises."],
-["adrenaline","Prepares body for fight or flight",["Maintains uterine lining","Filters blood","Makes yoghurt"],"Adrenaline increases heart rate and breathing rate.","Emergency hormone."],
-["homeostasis","Maintenance of a stable internal environment",["Production of gametes","Breakdown of glucose","Grouping organisms"],"Homeostasis keeps internal conditions stable.","Stable internal condition."]
+["nervous system","sistem saraf","Detects stimuli and coordinates responses","Mengesan rangsangan dan menyelaras gerak balas",["Produces glucose","Filters blood","Stores urine"],["Menghasilkan glukosa","Menuras darah","Menyimpan air kencing"],"The nervous system coordinates body responses.","Sistem saraf menyelaras gerak balas badan.","Stimulus-response.","Rangsangan-gerak balas."],
+["central nervous system","sistem saraf pusat","Brain and spinal cord","Otak dan saraf tunjang",["Heart and lungs","Kidney and bladder","Ovary and uterus"],["Jantung dan paru-paru","Ginjal dan pundi kencing","Ovari dan uterus"],"CNS consists of brain and spinal cord.","Sistem saraf pusat terdiri daripada otak dan saraf tunjang.","CNS = brain + spinal cord.","SSP = otak + saraf tunjang."],
+["sensory neurone","neuron deria","Carries impulse from receptor to CNS","Membawa impuls dari reseptor ke sistem saraf pusat",["Carries impulse from CNS to effector","Produces hormone","Destroys pathogen"],["Membawa impuls dari SSP ke efektor","Menghasilkan hormon","Memusnahkan patogen"],"Sensory neurone carries impulse to CNS.","Neuron deria membawa impuls ke SSP.","Sensory = to CNS.","Deria = ke SSP."],
+["motor neurone","neuron motor","Carries impulse from CNS to effector","Membawa impuls dari sistem saraf pusat ke efektor",["Carries impulse to CNS","Produces glucose","Filters blood"],["Membawa impuls ke SSP","Menghasilkan glukosa","Menuras darah"],"Motor neurone carries impulse to effector.","Neuron motor membawa impuls ke efektor.","Motor = movement.","Motor = pergerakan."],
+["reflex action","tindakan refleks","Rapid automatic response to stimulus","Gerak balas automatik yang cepat terhadap rangsangan",["Slow hormone response","Production of antibodies","Blood clotting"],["Gerak balas hormon yang perlahan","Penghasilan antibodi","Pembekuan darah"],"Reflex action protects the body.","Tindakan refleks melindungi badan.","Rapid + automatic.","Cepat + automatik."],
+["reflex arc","arka refleks","Receptor to sensory neurone to relay neurone to motor neurone to effector","Reseptor ke neuron deria ke neuron geganti ke neuron motor ke efektor",["Effector to receptor only","Brain to kidney only","Glucose to insulin"],["Efektor ke reseptor sahaja","Otak ke ginjal sahaja","Glukosa ke insulin"],"Reflex arc is the pathway of reflex action.","Arka refleks ialah laluan tindakan refleks.","Receptor starts, effector ends.","Bermula reseptor, tamat efektor."],
+["insulin","insulin","Lowers blood glucose level","Menurunkan aras glukosa darah",["Raises blood glucose","Absorbs light","Carries oxygen"],["Meningkatkan glukosa darah","Menyerap cahaya","Mengangkut oksigen"],"Insulin is secreted when blood glucose is high.","Insulin dirembeskan apabila glukosa darah tinggi.","Insulin lowers.","Insulin menurunkan."],
+["glucagon","glukagon","Raises blood glucose level","Meningkatkan aras glukosa darah",["Lowers blood glucose","Forms urine","Absorbs light"],["Menurunkan glukosa darah","Membentuk air kencing","Menyerap cahaya"],"Glucagon is secreted when blood glucose is low.","Glukagon dirembeskan apabila glukosa darah rendah.","Glucagon raises.","Glukagon menaikkan."],
+["adrenaline","adrenalina","Prepares body for fight or flight","Menyediakan badan untuk gerak balas lawan atau lari",["Maintains uterine lining","Filters blood","Makes yoghurt"],["Mengekalkan lapisan uterus","Menuras darah","Membuat yogurt"],"Adrenaline increases heart rate and breathing rate.","Adrenalina meningkatkan kadar denyutan jantung dan pernafasan.","Emergency hormone.","Hormon kecemasan."],
+["homeostasis","homeostasis","Maintenance of a stable internal environment","Pengekalan persekitaran dalaman yang stabil",["Production of gametes","Breakdown of glucose","Grouping organisms"],["Penghasilan gamet","Penguraian glukosa","Pengelompokan organisma"],"Homeostasis keeps internal conditions stable.","Homeostasis mengekalkan keadaan dalaman yang stabil.","Stable internal condition.","Keadaan dalaman stabil."]
 ],
 M7:[
-["testes","Produce sperm and testosterone",["Produce ovum","Site of implantation","Store urine"],"Testes produce sperm and male hormone.","Male gamete + hormone."],
-["ovary","Produces ovum, oestrogen and progesterone",["Produces sperm","Filters blood","Carries semen"],"Ovary produces ova and female hormones.","Ovum + hormones."],
-["fallopian tube","Site of fertilisation",["Site of implantation","Produces sperm","Stores urine"],"Fertilisation occurs in the fallopian tube.","Not uterus."],
-["uterus","Site of implantation and foetal development",["Site of fertilisation","Produces sperm","Filters blood"],"Embryo implants in the uterus.","Embryo develops here."],
-["fertilisation","Fusion of sperm and ovum to form zygote",["Release of ovum","Attachment of embryo","Breakdown of glucose"],"Fertilisation forms a zygote.","Fusion + zygote."],
-["implantation","Attachment of embryo to uterine wall",["Fusion of gametes","Release of ovum","Production of sperm"],"Implantation occurs in the uterus.","Embryo attaches."],
-["ovulation","Release of mature ovum from ovary",["Fusion of sperm and ovum","Attachment to uterus","Production of urine"],"Ovulation usually occurs around day 14.","Release of ovum."],
-["progesterone","Maintains uterine lining for pregnancy",["Lowers glucose","Produces ATP","Carries oxygen"],"Progesterone maintains the uterine lining.","Pregnancy support hormone."],
-["placenta","Exchanges oxygen, nutrients and wastes between mother and foetus",["Produces sperm","Site of fertilisation","Releases ovum"],"Placenta is an exchange organ.","Mother-foetus exchange."],
-["zygote","Fertilised egg cell formed after fertilisation",["Male gamete","Female hormone","Blood vessel"],"Zygote is the first cell after fertilisation.","Fertilised egg."]
+["testes","testis","Produce sperm and testosterone","Menghasilkan sperma dan testosteron",["Produce ovum","Site of implantation","Store urine"],["Menghasilkan ovum","Tapak penempelan","Menyimpan air kencing"],"Testes produce sperm and male hormone.","Testis menghasilkan sperma dan hormon lelaki.","Male gamete + hormone.","Gamet jantan + hormon."],
+["ovary","ovari","Produces ovum, oestrogen and progesterone","Menghasilkan ovum, estrogen dan progesteron",["Produces sperm","Filters blood","Carries semen"],["Menghasilkan sperma","Menuras darah","Mengangkut semen"],"Ovary produces ova and female hormones.","Ovari menghasilkan ovum dan hormon perempuan.","Ovum + hormones.","Ovum + hormon."],
+["fallopian tube","tiub Fallopio","Site of fertilisation","Tapak persenyawaan",["Site of implantation","Produces sperm","Stores urine"],["Tapak penempelan","Menghasilkan sperma","Menyimpan air kencing"],"Fertilisation occurs in the fallopian tube.","Persenyawaan berlaku dalam tiub Fallopio.","Not uterus.","Bukan uterus."],
+["uterus","uterus","Site of implantation and foetal development","Tapak penempelan dan perkembangan fetus",["Site of fertilisation","Produces sperm","Filters blood"],["Tapak persenyawaan","Menghasilkan sperma","Menuras darah"],"Embryo implants in the uterus.","Embrio menempel pada uterus.","Embryo develops here.","Embrio berkembang di sini."],
+["fertilisation","persenyawaan","Fusion of sperm and ovum to form zygote","Percantuman sperma dan ovum untuk membentuk zigot",["Release of ovum","Attachment of embryo","Breakdown of glucose"],["Pembebasan ovum","Penempelan embrio","Penguraian glukosa"],"Fertilisation forms a zygote.","Persenyawaan membentuk zigot.","Fusion + zygote.","Percantuman + zigot."],
+["implantation","penempelan","Attachment of embryo to uterine wall","Perlekatan embrio pada dinding uterus",["Fusion of gametes","Release of ovum","Production of sperm"],["Percantuman gamet","Pembebasan ovum","Penghasilan sperma"],"Implantation occurs in the uterus.","Penempelan berlaku dalam uterus.","Embryo attaches.","Embrio melekat."],
+["ovulation","pengovulan","Release of mature ovum from ovary","Pembebasan ovum matang dari ovari",["Fusion of sperm and ovum","Attachment to uterus","Production of urine"],["Percantuman sperma dan ovum","Perlekatan pada uterus","Penghasilan air kencing"],"Ovulation usually occurs around day 14.","Pengovulan biasanya berlaku sekitar hari ke-14.","Release of ovum.","Pembebasan ovum."],
+["progesterone","progesteron","Maintains uterine lining for pregnancy","Mengekalkan lapisan uterus untuk kehamilan",["Lowers glucose","Produces ATP","Carries oxygen"],["Menurunkan glukosa","Menghasilkan ATP","Mengangkut oksigen"],"Progesterone maintains the uterine lining.","Progesteron mengekalkan lapisan uterus.","Pregnancy support hormone.","Hormon sokongan kehamilan."],
+["placenta","plasenta","Exchanges oxygen, nutrients and wastes between mother and foetus","Menukar oksigen, nutrien dan bahan buangan antara ibu dan fetus",["Produces sperm","Site of fertilisation","Releases ovum"],["Menghasilkan sperma","Tapak persenyawaan","Membebaskan ovum"],"Placenta is an exchange organ.","Plasenta ialah organ pertukaran bahan.","Mother-foetus exchange.","Pertukaran ibu-fetus."],
+["zygote","zigot","Fertilised egg cell formed after fertilisation","Sel telur tersenyawa yang terbentuk selepas persenyawaan",["Male gamete","Female hormone","Blood vessel"],["Gamet jantan","Hormon perempuan","Salur darah"],"Zygote is the first cell after fertilisation.","Zigot ialah sel pertama selepas persenyawaan.","Fertilised egg.","Telur tersenyawa."]
 ],
 M8:[
-["biodiversity","Variety of living organisms in an area",["One species only","Movement of water","Production of insulin"],"Biodiversity means variety of living organisms.","Variety is key."],
-["genetic diversity","Variation of genes within a species",["Variety of ecosystems","Non-living factor","Food chain"],"Genetic diversity occurs within one species.","Genes vary."],
-["species diversity","Variety of species in an area",["Variety of genes only","Water movement","Hormone control"],"Species diversity means many different species.","Many species."],
-["ecosystem diversity","Variety of ecosystems in an area",["One organism only","A single gene","Blood flow"],"Different ecosystems increase biodiversity.","Forest, pond, mangrove."],
-["ecosystem","Interaction between organisms and their environment",["Only animals in zoo","Only plants","A single gene"],"Ecosystem includes living and non-living components.","Living + environment."],
-["biotic factor","Living component of ecosystem",["Non-living component","Energy currency","Foreign gene"],"Biotic factors are living things.","Bio = life."],
-["abiotic factor","Non-living component of ecosystem",["Living component","Gamete","Hormone"],"Abiotic factors include light, water and temperature.","Non-living."],
-["decomposer","Organism that breaks down dead matter and recycles nutrients",["Producer of sperm","Heart chamber","Blood pigment"],"Decomposers recycle nutrients.","Bacteria/fungi."],
-["in-situ conservation","Conservation in natural habitat",["Conservation outside natural habitat","Genetic engineering","Fermentation"],"In-situ protects species in their habitat.","Original place."],
-["ex-situ conservation","Conservation outside natural habitat",["Conservation in natural habitat","Food chain","Osmosis"],"Ex-situ includes zoos and seed banks.","Outside habitat."]
+["biodiversity","biodiversiti","Variety of living organisms in an area","Kepelbagaian organisma hidup di sesuatu kawasan",["One species only","Movement of water","Production of insulin"],["Satu spesies sahaja","Pergerakan air","Penghasilan insulin"],"Biodiversity means variety of living organisms.","Biodiversiti bermaksud kepelbagaian organisma hidup.","Variety is key.","Kepelbagaian ialah kata kunci."],
+["genetic diversity","kepelbagaian genetik","Variation of genes within a species","Variasi gen dalam sesuatu spesies",["Variety of ecosystems","Non-living factor","Food chain"],["Kepelbagaian ekosistem","Faktor bukan hidup","Rantai makanan"],"Genetic diversity occurs within one species.","Kepelbagaian genetik berlaku dalam satu spesies.","Genes vary.","Gen berbeza."],
+["species diversity","kepelbagaian spesies","Variety of species in an area","Kepelbagaian spesies di sesuatu kawasan",["Variety of genes only","Water movement","Hormone control"],["Kepelbagaian gen sahaja","Pergerakan air","Kawalan hormon"],"Species diversity means many different species.","Kepelbagaian spesies bermaksud banyak spesies berbeza.","Many species.","Banyak spesies."],
+["ecosystem diversity","kepelbagaian ekosistem","Variety of ecosystems in an area","Kepelbagaian ekosistem di sesuatu kawasan",["One organism only","A single gene","Blood flow"],["Satu organisma sahaja","Satu gen","Aliran darah"],"Different ecosystems increase biodiversity.","Ekosistem yang berbeza meningkatkan biodiversiti.","Forest, pond, mangrove.","Hutan, kolam, paya bakau."],
+["ecosystem","ekosistem","Interaction between organisms and their environment","Interaksi antara organisma dengan persekitarannya",["Only animals in zoo","Only plants","A single gene"],["Haiwan di zoo sahaja","Tumbuhan sahaja","Satu gen"],"Ecosystem includes living and non-living components.","Ekosistem melibatkan komponen hidup dan bukan hidup.","Living + environment.","Hidup + persekitaran."],
+["biotic factor","faktor biosis","Living component of ecosystem","Komponen hidup dalam ekosistem",["Non-living component","Energy currency","Foreign gene"],["Komponen bukan hidup","Mata wang tenaga","Gen asing"],"Biotic factors are living things.","Faktor biosis ialah benda hidup.","Bio = life.","Bio = kehidupan."],
+["abiotic factor","faktor abiosis","Non-living component of ecosystem","Komponen bukan hidup dalam ekosistem",["Living component","Gamete","Hormone"],["Komponen hidup","Gamet","Hormon"],"Abiotic factors include light, water and temperature.","Faktor abiosis termasuk cahaya, air dan suhu.","Non-living.","Bukan hidup."],
+["decomposer","pengurai","Organism that breaks down dead matter and recycles nutrients","Organisma yang menguraikan bahan mati dan mengitar semula nutrien",["Producer of sperm","Heart chamber","Blood pigment"],["Penghasil sperma","Ruang jantung","Pigmen darah"],"Decomposers recycle nutrients.","Pengurai mengitar semula nutrien.","Bacteria/fungi.","Bakteria/kulat."],
+["in-situ conservation","pemuliharaan in situ","Conservation in natural habitat","Pemuliharaan dalam habitat semula jadi",["Conservation outside natural habitat","Genetic engineering","Fermentation"],["Pemuliharaan di luar habitat semula jadi","Kejuruteraan genetik","Penapaian"],"In-situ protects species in their habitat.","In situ melindungi spesies dalam habitatnya.","Original place.","Tempat asal."],
+["ex-situ conservation","pemuliharaan ex situ","Conservation outside natural habitat","Pemuliharaan di luar habitat semula jadi",["Conservation in natural habitat","Food chain","Osmosis"],["Pemuliharaan dalam habitat semula jadi","Rantai makanan","Osmosis"],"Ex-situ includes zoos and seed banks.","Ex situ termasuk zoo dan bank biji benih.","Outside habitat.","Di luar habitat."]
 ],
 M9:[
-["biotechnology","Use of living organisms or components to produce useful products",["Study of rocks","Movement of water","Blood circulation"],"Biotechnology uses living organisms or their components.","Living things + useful products."],
-["fermentation","Anaerobic breakdown of sugar by microorganisms",["Aerobic respiration","Fusion of gametes","Formation of urine"],"Fermentation occurs without oxygen.","No oxygen."],
-["yeast","Microorganism used in bread making",["Lactobacillus","Mosquito","Virus"],"Yeast produces carbon dioxide that makes dough rise.","Bread = yeast."],
-["Lactobacillus","Bacteria used to make yoghurt",["Yeast","Virus","Mosquito"],"Lactobacillus converts lactose to lactic acid.","Yoghurt bacteria."],
-["genetic engineering","Manipulation of genes to produce desired characteristics",["Grouping species","Blood clotting","Plant wilting"],"Genetic engineering changes genes.","Manipulate genes."],
-["recombinant DNA","DNA formed by joining DNA from different organisms",["DNA with no gene","ATP molecule","Blood plasma"],"Recombinant DNA combines DNA from different sources.","Combined DNA."],
-["plasmid","Vector used to transfer gene into bacteria",["Digestive enzyme","Light pigment","Blood cell"],"Plasmid carries desired gene.","Vector = carrier."],
-["tissue culture","Growing plant cells or tissues in sterile nutrient medium",["Blood clotting","Gamete fusion","Respiration"],"Tissue culture produces many identical plants.","Sterile medium."],
-["cloning","Production of genetically identical organisms",["Production of different gametes","Breakdown of sugar","Classification"],"Cloning produces identical copies.","Identical organisms."],
-["GMO","Organism containing foreign gene",["Organism without DNA","Blood group","Urine sample"],"GMO has inserted foreign gene.","Foreign gene."]
+["biotechnology","bioteknologi","Use of living organisms or components to produce useful products","Penggunaan organisma hidup atau komponennya untuk menghasilkan produk berguna",["Study of rocks","Movement of water","Blood circulation"],["Kajian batuan","Pergerakan air","Peredaran darah"],"Biotechnology uses living organisms or their components.","Bioteknologi menggunakan organisma hidup atau komponennya.","Living things + useful products.","Organisma hidup + produk berguna."],
+["fermentation","penapaian","Anaerobic breakdown of sugar by microorganisms","Penguraian gula secara anaerob oleh mikroorganisma",["Aerobic respiration","Fusion of gametes","Formation of urine"],["Respirasi aerob","Percantuman gamet","Pembentukan air kencing"],"Fermentation occurs without oxygen.","Penapaian berlaku tanpa oksigen.","No oxygen.","Tanpa oksigen."],
+["yeast","yis","Microorganism used in bread making","Mikroorganisma yang digunakan dalam pembuatan roti",["Lactobacillus","Mosquito","Virus"],["Lactobacillus","Nyamuk","Virus"],"Yeast produces carbon dioxide that makes dough rise.","Yis menghasilkan karbon dioksida yang menyebabkan doh naik.","Bread = yeast.","Roti = yis."],
+["Lactobacillus","Lactobacillus","Bacteria used to make yoghurt","Bakteria yang digunakan untuk membuat yogurt",["Yeast","Virus","Mosquito"],["Yis","Virus","Nyamuk"],"Lactobacillus converts lactose to lactic acid.","Lactobacillus menukarkan laktosa kepada asid laktik.","Yoghurt bacteria.","Bakteria yogurt."],
+["genetic engineering","kejuruteraan genetik","Manipulation of genes to produce desired characteristics","Manipulasi gen untuk menghasilkan ciri yang dikehendaki",["Grouping species","Blood clotting","Plant wilting"],["Pengelompokan spesies","Pembekuan darah","Kelayuan tumbuhan"],"Genetic engineering changes genes.","Kejuruteraan genetik mengubah gen.","Manipulate genes.","Manipulasi gen."],
+["recombinant DNA","DNA rekombinan","DNA formed by joining DNA from different organisms","DNA yang terbentuk melalui penggabungan DNA daripada organisma berbeza",["DNA with no gene","ATP molecule","Blood plasma"],["DNA tanpa gen","Molekul ATP","Plasma darah"],"Recombinant DNA combines DNA from different sources.","DNA rekombinan menggabungkan DNA daripada sumber berbeza.","Combined DNA.","DNA gabungan."],
+["plasmid","plasmid","Vector used to transfer gene into bacteria","Vektor yang digunakan untuk memindahkan gen ke dalam bakteria",["Digestive enzyme","Light pigment","Blood cell"],["Enzim pencernaan","Pigmen cahaya","Sel darah"],"Plasmid carries desired gene.","Plasmid membawa gen yang dikehendaki.","Vector = carrier.","Vektor = pembawa."],
+["tissue culture","kultur tisu","Growing plant cells or tissues in sterile nutrient medium","Penumbuhan sel atau tisu tumbuhan dalam medium nutrien steril",["Blood clotting","Gamete fusion","Respiration"],["Pembekuan darah","Percantuman gamet","Respirasi"],"Tissue culture produces many identical plants.","Kultur tisu menghasilkan banyak tumbuhan yang seiras.","Sterile medium.","Medium steril."],
+["cloning","pengklonan","Production of genetically identical organisms","Penghasilan organisma yang seiras secara genetik",["Production of different gametes","Breakdown of sugar","Classification"],["Penghasilan gamet berbeza","Penguraian gula","Pengelasan"],"Cloning produces genetically identical copies.","Pengklonan menghasilkan salinan yang seiras secara genetik.","Identical organisms.","Organisma seiras."],
+["GMO","organisma terubah suai genetik","Organism containing foreign gene","Organisma yang mengandungi gen asing",["Organism without DNA","Blood group","Urine sample"],["Organisma tanpa DNA","Kumpulan darah","Sampel air kencing"],"GMO has inserted foreign gene.","GMO mempunyai gen asing yang dimasukkan.","Foreign gene.","Gen asing."]
 ],
 M10:[
-["hypothesis","Prediction relating manipulated and responding variables",["Observation only","Variable kept constant","Final score"],"Hypothesis links two variables.","Prediction before experiment."],
-["manipulated variable","Variable changed by the researcher",["Variable measured","Variable kept constant","Control set-up"],"Manipulated variable is changed.","Changed variable."],
-["responding variable","Variable measured in an experiment",["Variable changed","Variable kept constant","Control set-up"],"Responding variable is the measured result.","Measured variable."],
-["controlled variable","Variable kept constant",["Variable measured","Variable changed","Hypothesis"],"Controlled variables ensure fair test.","Kept constant."],
-["control set-up","Used for comparison to ensure fair test",["Used to change all variables","Used to remove results","Used to increase marks"],"Control set-up allows comparison.","Comparison group."],
-["observation","What is seen or measured",["Reason for result","Prediction","Theory only"],"Observation is recorded from the experiment.","See or measure."],
-["inference","Logical explanation based on observation",["What is seen only","Variable changed","Question number"],"Inference explains the observation.","Why it happened."],
-["conclusion","Statement that accepts or rejects the hypothesis",["A diagram only","A random guess","A controlled variable"],"Conclusion is based on results.","Accept or reject hypothesis."],
-["positive relationship","Both variables increase together",["One increases while other decreases","No change","No variables"],"Positive relationship means both increase.","Increase together."],
-["limiting factor","Factor that limits the rate of a process",["Hormone lowering glucose","Blood vessel","Gamete"],"A limiting factor prevents further increase in rate.","Scarcest factor limits rate."]
+["hypothesis","hipotesis","Prediction relating manipulated and responding variables","Ramalan yang menghubungkan pemboleh ubah dimanipulasikan dengan pemboleh ubah bergerak balas",["Observation only","Variable kept constant","Final score"],["Pemerhatian sahaja","Pemboleh ubah dimalarkan","Markah akhir"],"Hypothesis links two variables.","Hipotesis menghubungkan dua pemboleh ubah.","Prediction before experiment.","Ramalan sebelum eksperimen."],
+["manipulated variable","pemboleh ubah dimanipulasikan","Variable changed by the researcher","Pemboleh ubah yang diubah oleh penyelidik",["Variable measured","Variable kept constant","Control set-up"],["Pemboleh ubah diukur","Pemboleh ubah dimalarkan","Set kawalan"],"Manipulated variable is changed.","Pemboleh ubah dimanipulasikan ialah pemboleh ubah yang diubah.","Changed variable.","Pemboleh ubah yang diubah."],
+["responding variable","pemboleh ubah bergerak balas","Variable measured in an experiment","Pemboleh ubah yang diukur dalam eksperimen",["Variable changed","Variable kept constant","Control set-up"],["Pemboleh ubah diubah","Pemboleh ubah dimalarkan","Set kawalan"],"Responding variable is the measured result.","Pemboleh ubah bergerak balas ialah keputusan yang diukur.","Measured variable.","Pemboleh ubah yang diukur."],
+["controlled variable","pemboleh ubah dimalarkan","Variable kept constant","Pemboleh ubah yang dikekalkan malar",["Variable measured","Variable changed","Hypothesis"],["Pemboleh ubah diukur","Pemboleh ubah diubah","Hipotesis"],"Controlled variables ensure fair test.","Pemboleh ubah dimalarkan memastikan ujian adil.","Kept constant.","Dikekalkan malar."],
+["control set-up","set kawalan","Used for comparison to ensure fair test","Digunakan sebagai perbandingan untuk memastikan ujian adil",["Used to change all variables","Used to remove results","Used to increase marks"],["Digunakan untuk mengubah semua pemboleh ubah","Digunakan untuk membuang keputusan","Digunakan untuk meningkatkan markah"],"Control set-up allows comparison.","Set kawalan membolehkan perbandingan dibuat.","Comparison group.","Kumpulan perbandingan."],
+["observation","pemerhatian","What is seen or measured","Apa yang dilihat atau diukur",["Reason for result","Prediction","Theory only"],["Sebab keputusan","Ramalan","Teori sahaja"],"Observation is recorded from the experiment.","Pemerhatian direkodkan daripada eksperimen.","See or measure.","Lihat atau ukur."],
+["inference","inferens","Logical explanation based on observation","Penjelasan logik berdasarkan pemerhatian",["What is seen only","Variable changed","Question number"],["Apa yang dilihat sahaja","Pemboleh ubah diubah","Nombor soalan"],"Inference explains the observation.","Inferens menerangkan pemerhatian.","Why it happened.","Mengapa berlaku."],
+["conclusion","kesimpulan","Statement that accepts or rejects the hypothesis","Pernyataan yang menerima atau menolak hipotesis",["A diagram only","A random guess","A controlled variable"],["Rajah sahaja","Tekaan rawak","Pemboleh ubah dimalarkan"],"Conclusion is based on results.","Kesimpulan berdasarkan keputusan.","Accept or reject hypothesis.","Terima atau tolak hipotesis."],
+["positive relationship","hubungan positif","Both variables increase together","Kedua-dua pemboleh ubah meningkat bersama-sama",["One increases while other decreases","No change","No variables"],["Satu meningkat manakala satu menurun","Tiada perubahan","Tiada pemboleh ubah"],"Positive relationship means both increase.","Hubungan positif bermaksud kedua-duanya meningkat.","Increase together.","Meningkat bersama-sama."],
+["limiting factor","faktor pengehad","Factor that limits the rate of a process","Faktor yang mengehadkan kadar sesuatu proses",["Hormone lowering glucose","Blood vessel","Gamete"],["Hormon yang menurunkan glukosa","Salur darah","Gamet"],"A limiting factor prevents further increase in rate.","Faktor pengehad menghalang peningkatan kadar seterusnya.","Scarcest factor limits rate.","Faktor paling kurang mengehadkan kadar."]
 ]
 };
 
-const STYLES=[
-x=>`What is ${x[0]}?`,
-x=>`Which answer best describes ${x[0]}?`,
-x=>`Identify the correct statement about ${x[0]}.`,
-x=>`Which option would most likely score marks for ${x[0]}?`,
-x=>`A student is asked about ${x[0]}. Which answer is correct?`,
-x=>`Which statement matches ${x[0]}?`,
-x=>`Choose the best SPM answer for ${x[0]}.`,
-x=>`Which option is most closely related to ${x[0]}?`,
-x=>`Apply the concept of ${x[0]}. Which answer is best?`,
-x=>`Why is ${x[0]} important in Biology?`
-];
+const TEMPLATES={
+en:[
+x=>`What is ${x.enTerm}?`,
+x=>`Which answer best describes ${x.enTerm}?`,
+x=>`Identify the correct statement about ${x.enTerm}.`,
+x=>`Which option would most likely score marks for ${x.enTerm}?`,
+x=>`A student is asked about ${x.enTerm}. Which answer is correct?`,
+x=>`Which statement matches ${x.enTerm}?`,
+x=>`Choose the best SPM answer for ${x.enTerm}.`,
+x=>`Which option is most closely related to ${x.enTerm}?`,
+x=>`Apply the concept of ${x.enTerm}. Which answer is best?`,
+x=>`Why is ${x.enTerm} important in Biology?`
+],
+bm:[
+x=>`Apakah maksud ${x.bmTerm}?`,
+x=>`Jawapan manakah yang paling tepat menerangkan ${x.bmTerm}?`,
+x=>`Kenal pasti pernyataan yang betul tentang ${x.bmTerm}.`,
+x=>`Pilihan manakah paling sesuai untuk mendapat markah bagi ${x.bmTerm}?`,
+x=>`Seorang murid ditanya tentang ${x.bmTerm}. Jawapan manakah betul?`,
+x=>`Pernyataan manakah sepadan dengan ${x.bmTerm}?`,
+x=>`Pilih jawapan SPM terbaik bagi ${x.bmTerm}.`,
+x=>`Pilihan manakah paling berkaitan dengan ${x.bmTerm}?`,
+x=>`Aplikasikan konsep ${x.bmTerm}. Jawapan manakah terbaik?`,
+x=>`Mengapakah ${x.bmTerm} penting dalam Biologi?`
+]
+};
 
 function makeBank(){
 let out=[];
 for(const mod in ITEMS){
-ITEMS[mod].forEach((item,itemIndex)=>{
-STYLES.forEach((makeStem,styleIndex)=>{
-out.push({
-module:mod,
-id:`${mod}-${itemIndex}-${styleIndex}`,
-stem:makeStem(item),
-answer:item[1],
-d:item[2],
-explanation:item[3],
-hint:item[4],
-difficulty:styleIndex>=8?"hard":"standard"
-});
-});
+ITEMS[mod].forEach((raw,i)=>{
+const item={enTerm:raw[0],bmTerm:raw[1],answer:{en:raw[2],bm:raw[3]},d:{en:raw[4],bm:raw[5]},ex:{en:raw[6],bm:raw[7]},hint:{en:raw[8],bm:raw[9]}};
+for(let t=0;t<10;t++){
+out.push({module:mod,id:`${mod}-${i}-${t}`,difficulty:t>=8?"hard":"standard",stem:{en:TEMPLATES.en[t](item),bm:TEMPLATES.bm[t](item)},answer:item.answer,d:item.d,ex:item.ex,hint:item.hint});
+}
 });
 }
 return out;
 }
-
 const BANK=makeBank();
 
-let selected=[],questions=[],idx=0,score=0,answered=false,timer=null,timeLeft=60,history=[];
+let selected=[],questions=[],idx=0,score=0,answered=false,timer=null,timeLeft=60,history=[],LANG="en";
 
 function init(){
 const grid=document.getElementById("moduleGrid");
 MODULES.forEach(m=>{
 const label=document.createElement("label");
 label.className="module";
-label.innerHTML=`<input type="checkbox" value="${m[0]}"><div><strong>${m[0]} — ${m[1]}</strong><span>${m[2]}</span><span>100 unique questions</span></div>`;
+label.innerHTML=`<input type="checkbox" value="${m[0]}"><div><strong>${m[0]} — ${m[1]} / ${m[2]}</strong><span>${m[3]}</span><span>${m[4]}</span><span>100 bilingual generated questions</span></div>`;
 grid.appendChild(label);
 });
 }
@@ -292,129 +254,72 @@ function shuffle(a){return[...a].sort(()=>Math.random()-0.5)}
 
 function buildSessionQuestions(selectedModules,count){
 let pool=BANK.filter(x=>selectedModules.includes(x.module));
-let seen=new Set(),unique=[];
+let unique=[],seen=new Set();
 for(const item of shuffle(pool)){if(!seen.has(item.id)){seen.add(item.id);unique.push(item)}}
-let hard=unique.filter(x=>x.difficulty==="hard");
-let standard=unique.filter(x=>x.difficulty!=="hard");
+let hard=unique.filter(x=>x.difficulty==="hard"),standard=unique.filter(x=>x.difficulty!=="hard");
 let hardTarget=Math.min(hard.length,Math.round(count*0.2));
-let session=[...shuffle(hard).slice(0,hardTarget),...shuffle(standard).slice(0,count-hardTarget)];
-return shuffle(session).slice(0,count);
+return shuffle([...shuffle(hard).slice(0,hardTarget),...shuffle(standard).slice(0,count-hardTarget)]).slice(0,count);
 }
-
 function startQuiz(){
+LANG=document.getElementById("lang").value;
 selected=[...document.querySelectorAll(".module input:checked")].map(i=>i.value);
-if(!selected.length){alert("Choose at least one module.");return}
-const count=parseInt(document.getElementById("count").value);
-questions=buildSessionQuestions(selected,count);
+if(!selected.length){alert("Choose at least one module / Pilih sekurang-kurangnya satu modul.");return}
+questions=buildSessionQuestions(selected,parseInt(document.getElementById("count").value));
 idx=0;score=0;history=[];
-document.getElementById("intro").style.display="none";
-document.getElementById("results").style.display="none";
-document.getElementById("quiz").style.display="block";
+document.getElementById("intro").style.display="none";document.getElementById("results").style.display="none";document.getElementById("quiz").style.display="block";
 showQuestion();
 }
-
 function showQuestion(){
 answered=false;timeLeft=60;
-const q=questions[idx];
-const module=MODULES.find(m=>m[0]===q.module);
-document.getElementById("qnum").textContent=`Question ${idx+1} of ${questions.length}`;
+const q=questions[idx],m=MODULES.find(x=>x[0]===q.module),mName=LANG==="bm"?m[2]:m[1];
+document.getElementById("qnum").textContent=LANG==="bm"?`Soalan ${idx+1} daripada ${questions.length}`:`Question ${idx+1} of ${questions.length}`;
 document.getElementById("bar").style.width=`${(idx/questions.length)*100}%`;
-document.getElementById("moduleName").textContent=`${module[0]} — ${module[1]}`;
-document.getElementById("question").textContent=q.stem;
-document.getElementById("hintBox").style.display="none";
-document.getElementById("hintBox").innerHTML="";
-document.getElementById("explain").style.display="none";
-document.getElementById("explain").innerHTML="";
+document.getElementById("moduleName").textContent=`${m[0]} — ${mName}`;
+document.getElementById("question").textContent=q.stem[LANG];
+document.getElementById("hintBox").style.display="none";document.getElementById("hintBox").innerHTML="";
+document.getElementById("explain").style.display="none";document.getElementById("explain").innerHTML="";
 document.getElementById("nextBtn").disabled=true;
 const opts=document.getElementById("options");opts.innerHTML="";
-const choices=shuffle([q.answer,...q.d]);
-q.correctIndex=choices.indexOf(q.answer);
-choices.forEach((op,i)=>{
-const d=document.createElement("div");
-d.className="option";
-d.textContent=op;
-d.onclick=()=>choose(i);
-opts.appendChild(d);
-});
+const choices=shuffle([q.answer[LANG],...q.d[LANG]]);
+q.correctIndex=choices.indexOf(q.answer[LANG]);
+choices.forEach((op,i)=>{const d=document.createElement("div");d.className="option";d.textContent=op;d.onclick=()=>choose(i);opts.appendChild(d)});
 startTimer();
 }
-
 function startTimer(){
-clearInterval(timer);
-const t=document.getElementById("timer");
-t.classList.remove("low");
-t.textContent=timeLeft;
-timer=setInterval(()=>{
-timeLeft--;t.textContent=timeLeft;
-if(timeLeft<=10)t.classList.add("low");
-if(timeLeft<=0){clearInterval(timer);markTimeout()}
-},1000);
+clearInterval(timer);const t=document.getElementById("timer");t.classList.remove("low");t.textContent=timeLeft;
+timer=setInterval(()=>{timeLeft--;t.textContent=timeLeft;if(timeLeft<=10)t.classList.add("low");if(timeLeft<=0){clearInterval(timer);markTimeout()}},1000);
 }
-
 function choose(i){
-if(answered)return;
-answered=true;clearInterval(timer);
-const q=questions[idx];
-const correct=i===q.correctIndex;
-if(correct)score++;
+if(answered)return;answered=true;clearInterval(timer);
+const q=questions[idx],correct=i===q.correctIndex;if(correct)score++;
 [...document.querySelectorAll(".option")].forEach((o,j)=>{
-if(j===q.correctIndex){o.classList.add("correct");o.innerHTML=o.textContent+' <span class="signal ok">✓ Correct answer</span>'}
-if(j===i&&j!==q.correctIndex){o.classList.add("wrong");o.innerHTML=o.textContent+' <span class="signal bad">✗ Your answer</span>'}
+if(j===q.correctIndex){o.classList.add("correct");o.innerHTML=o.textContent+` <span class="signal ok">✓ ${LANG==="bm"?"Jawapan betul":"Correct answer"}</span>`}
+if(j===i&&j!==q.correctIndex){o.classList.add("wrong");o.innerHTML=o.textContent+` <span class="signal bad">✗ ${LANG==="bm"?"Jawapan anda":"Your answer"}</span>`}
 });
 history.push({q,chosen:i,correct});
 document.getElementById("explain").style.display="block";
-document.getElementById("explain").innerHTML=`<span class="keyword">${correct?"Correct.":"Incorrect."}</span><br>${q.explanation}`;
+document.getElementById("explain").innerHTML=`<span class="keyword">${correct?(LANG==="bm"?"Betul.":"Correct."):(LANG==="bm"?"Salah.":"Incorrect.")}</span><br>${q.ex[LANG]}`;
 document.getElementById("nextBtn").disabled=false;
 }
-
 function showHint(){
-if(answered)return;
-const q=questions[idx];
-const box=document.getElementById("hintBox");
-box.style.display="block";
-box.innerHTML=`<span class="keyword">Hint:</span> ${q.hint}`;
+if(answered)return;const q=questions[idx],box=document.getElementById("hintBox");box.style.display="block";box.innerHTML=`<span class="keyword">${LANG==="bm"?"Petunjuk":"Hint"}:</span> ${q.hint[LANG]}`;
 }
-
 function markTimeout(){
-if(answered)return;
-answered=true;
-const q=questions[idx];
-[...document.querySelectorAll(".option")].forEach((o,j)=>{
-if(j===q.correctIndex){o.classList.add("correct");o.innerHTML=o.textContent+' <span class="signal ok">✓ Correct answer</span>'}
-});
+if(answered)return;answered=true;const q=questions[idx];
+[...document.querySelectorAll(".option")].forEach((o,j)=>{if(j===q.correctIndex){o.classList.add("correct");o.innerHTML=o.textContent+` <span class="signal ok">✓ ${LANG==="bm"?"Jawapan betul":"Correct answer"}</span>`}});
 history.push({q,chosen:null,correct:false});
-document.getElementById("explain").style.display="block";
-document.getElementById("explain").innerHTML=`<span class="keyword">Time up.</span><br>${q.explanation}`;
+document.getElementById("explain").style.display="block";document.getElementById("explain").innerHTML=`<span class="keyword">${LANG==="bm"?"Masa tamat.":"Time up."}</span><br>${q.ex[LANG]}`;
 document.getElementById("nextBtn").disabled=false;
 }
 function skipQuestion(){markTimeout()}
 function nextQuestion(){idx<questions.length-1?(idx++,showQuestion()):endQuiz()}
-
 function endQuiz(){
-clearInterval(timer);
-document.getElementById("quiz").style.display="none";
-document.getElementById("results").style.display="block";
-const pct=Math.round((score/questions.length)*100);
-document.getElementById("score").textContent=`${score}/${questions.length} (${pct}%)`;
-const byModule={};
-history.forEach(h=>{byModule[h.q.module]??={ok:0,total:0};byModule[h.q.module].total++;if(h.correct)byModule[h.q.module].ok++});
-document.getElementById("summary").innerHTML=Object.entries(byModule).map(([k,v])=>{
-const m=MODULES.find(x=>x[0]===k);
-return `<div class="badge">${m[0]} ${m[1]}: ${v.ok}/${v.total}</div>`;
-}).join(" ");
-document.getElementById("review").innerHTML=history.map((h,n)=>`
-<div class="reviewItem">
-<div class="small">${n+1}. ${h.q.module}</div>
-<strong>${h.q.stem}</strong><br>
-Correct answer: <span class="keyword">${h.q.answer}</span><br>
-<span class="small">${h.q.explanation}</span>
-</div>`).join("");
+clearInterval(timer);document.getElementById("quiz").style.display="none";document.getElementById("results").style.display="block";
+const pct=Math.round((score/questions.length)*100);document.getElementById("score").textContent=`${score}/${questions.length} (${pct}%)`;
+document.getElementById("summary").innerHTML="";
+document.getElementById("review").innerHTML=history.map((h,n)=>`<div class="reviewItem"><div class="small">${n+1}. ${h.q.module}</div><strong>${h.q.stem[LANG]}</strong><br>${LANG==="bm"?"Jawapan betul":"Correct answer"}: <span class="keyword">${h.q.answer[LANG]}</span><br><span class="small">${h.q.ex[LANG]}</span></div>`).join("");
 }
-
-function restart(){
-document.getElementById("results").style.display="none";
-document.getElementById("intro").style.display="block";
-}
+function restart(){document.getElementById("results").style.display="none";document.getElementById("intro").style.display="block"}
 init();
 </script>
 </body>
